@@ -12,10 +12,10 @@ public class Time{
 		min = 11.0;
 		second = 30.0;
 		double timeElapsed = (hour * 60.0*60.0 + min * 60.0 + second) - secSinceMidnight;
-		System.out.println("This is how many seconds have passed since midnight: " + secSinceMidnight);
-		System.out.println("This is how many seconds are left until midnight: " + secUntilMidnight);
-		System.out.println("This is the percent of the day that has elapsed: " + percentDay + "%");
-		System.out.println("This is how many seconds have passed since I began the assignment: " + timeElapsed);
+		System.out.printf("This is how many seconds have passed since midnight: %.2f s\n", secSinceMidnight);
+		System.out.printf("This is how many seconds are left until midnight: %.2f s\n", secUntilMidnight);
+		System.out.printf("This is the percent of the day that has elapsed: %.2f%%\n", percentDay);
+		System.out.printf("This is how many seconds have passed since I began the assignment: %.1f s\n", timeElapsed);
 	}
 	
 }
