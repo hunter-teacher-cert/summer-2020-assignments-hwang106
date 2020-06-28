@@ -1,4 +1,4 @@
-//exercises 1, 4, and 5
+//exercises 1, 4, 5, and 8
 
 import java.util.Arrays;
 import java.util.Random;
@@ -70,18 +70,37 @@ public class ArrayExample{
 				
 				for (int j = i * i; j < n; j += i){
 					
-					arrayPrime[j] = false;
-					
-				}
-									
-			}
-			
-			
+					arrayPrime[j] = false;					
+				}					
+			}						
 		}
 		
 		return arrayPrime;
 		
 	}
+	
+	public static int maxInRange(int[] intArray, int lowIndex, int highIndex){
+		
+		if (lowIndex == highIndex){
+			return intArray[lowIndex];
+		}
+		
+		if (intArray[lowIndex] > intArray[highIndex]){
+			return maxInRange(intArray, lowIndex, highIndex-1);
+		}
+		else{
+			return maxInRange(intArray, lowIndex + 1, highIndex);
+		}
+			
+	}
+	
+	public static int max(int[] intArray){
+		int lowIndex = 0;
+		int highIndex = intArray.length-1;
+		return maxInRange(intArray, lowIndex, highIndex);
+	}
+	
+	
 	
 	public static void main(String[] args){
 	
@@ -104,7 +123,10 @@ public class ArrayExample{
 		//System.out.println(Arrays.toString(randomArray)); //used for debugging indexOfMax
 		//System.out.println(indexOfMax(randomArray)); //used for debugging indexOfMax
 		
-		System.out.println(Arrays.toString(sieve(20)));
+		//System.out.println(Arrays.toString(sieve(20)));
+		
+		System.out.println(Arrays.toString(randomArray));
+		System.out.println(max(randomArray));
 
 	}
 
