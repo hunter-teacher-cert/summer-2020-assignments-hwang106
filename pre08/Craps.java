@@ -63,7 +63,7 @@ public class Craps{
 			numRounds = Integer.parseInt(args[0]);
 		}
 		
-		System.out.println(numRounds);
+		//System.out.println(numRounds);
 		
 		for (int i = 0; i<numRounds; i++){
 			
