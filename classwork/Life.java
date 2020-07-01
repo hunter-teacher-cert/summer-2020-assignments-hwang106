@@ -2,8 +2,9 @@
 import java.io.*;
 import java.util.*;
 
+
 class Life{
-	
+	//Creates board of arbitrary size, filled with - by default, to represent lack of life. 
 	public static char[][] createNewBoard(int rows, int cols){
 		char[][] board = new char[rows][cols];
 		for (int r = 0; r < rows; r++) {
@@ -14,6 +15,7 @@ class Life{
 		return board;
 	}
 	
+	//Prints char arrays
 	public static void printBoard(char[][] board){
 		for (int r = 0; r < board.length; r++){
 			for (int c = 0; c < board[r].length; c++){
@@ -21,21 +23,16 @@ class Life{
 			}
 			System.out.println();
 		}
-		System.out.println("\n\n----------------------------------------\n\n");
+		System.out.println("\n\n----------------------------------------------------------------------------------------------\n\n");
 	}
 	
+	//Sets individual cells to specified value
 	public static void setCell(char[][] board, int r, int c, char val){
 		if (r>=0 && c >=0 && r<board.length && c<board[r].length) //to prevent out of bounds error
 			board[r][c] = val;
 	}
 	
-	/*
-		Count and return the number of living neighbors around board[r][c]
-		
-		approach 1 - lots of if statements
-		approach 2 - you can loop over the grid from board[r-1][c-1] to board [r+1][c+1]
-	*/
-	
+	//counts adjacent (including diagonally adjacent) cells if a living neighbor is present; "universe is flat" -Tsee
 	public static int countNeighbors(char[][] board, int r, int c){
 		int neighbors;
 		if (board[r][c] == 'X'){
@@ -76,7 +73,7 @@ class Life{
 		}
 			
 		
-		//determine if board[r][c] is living or dead
+		//Conways' rules:
 			//if living and 2, 3 neighbors, then remain alive
 			//if dead and 3 neighbors, then become alive
 			//if living not 2, 3 neighbors, dies
@@ -98,6 +95,7 @@ class Life{
 			
 	}
 	
+	//generates randomly populated board; default probability of a cell containing life is hard-coded at 25%; can be set as parameter if important
 	public static void setBoard(char[][] board){
 		Random random = new Random();
 		for (int i = 0; i <= board.length; i++){
@@ -110,6 +108,7 @@ class Life{
 		}
 	}
 	
+	//creates the next generation's board based on Conway's rules in genNextCell method. 
 	public static char[][] nextBoard(char[][] board){
 		char[][] genNext = createNewBoard(board.length, board[0].length);
 		for (int r = 0; r < board.length; r++) {
@@ -117,27 +116,62 @@ class Life{
 				genNext[r][c] = genNextCell(board, r, c);
 			}
 		}
-		printBoard(genNext);
+		
 		return genNext;
 		
 	}
 	
+	/**
+		*creates multiple boards based on the number of generations desired 
+		*@param board starting Game of Life board, pre-poulated by setBoard method
+		*@param x number of generations desired
+	*/
 	public static void generationsOfLife(char[][] board, int x){
+		System.out.print("\033[H\033[2J");
 		for (int i = 0; i < x; i++){
 			board = nextBoard(board);
+			//System.out.print("[0;0H\n"); 
+			System.out.print("\033[H\033[2J");
+			printBoard(board);
+			delay(1000);
 		}
 	}
 	
-		
+	/*public static void drawBoard(char[][] board) {
+		int[][] intboard = new int[board.length][board[0].length];
+		for (int r = 0; r < intboard.length; r++) {
+			for (int c = 0; c < intboard[0].length; c++) {
+				if (board[r][c] == 'X')
+					intboard[r][c] = 255;
+				else
+					intboard[r][c] = 2;
+			}
+		}
+		ImageTest.drawImage(intboard);
+		//System.out.println(Arrays.deepToString(intboard));
+	}*/
+	
+	 //helper method to slow down animation 
+	  public static void delay(int n)
+	  {
+		try {
+			Thread.sleep(n);
+		} 
+		catch(InterruptedException e) {}
+	  }
+			
 	public static void main(String[] args){
-		char[][] board = createNewBoard(25, 25);
+		char[][] board = createNewBoard(25, 50);
 		//printBoard(board);
 		//setMiniBoard(board, 5, 5);
 		//printBoard(board);
 		//System.out.println(countNeighbors(board,5,5));
 		setBoard(board);
-		printBoard(board);
+		//printBoard(board);
+		//drawBoard(board);
 		generationsOfLife(board, 10);
+		//int[][] intBoard = {{255, 0, 255, 0, 255}, {255, 0, 255, 0, 255}, {255, 0, 255, 0, 255}, {255, 0, 255, 0, 255}, {255, 0, 255, 0, 255},};
+		//ImageTest.drawImage(intBoard);
 		
 	}
 	
