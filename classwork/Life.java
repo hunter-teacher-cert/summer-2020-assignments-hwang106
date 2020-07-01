@@ -51,10 +51,19 @@ class Life{
 	}
 	
 	/*
-		given a board and a cell, dtermine, based on the rules for Conways' GoL if the cell is alive ('X') or dead (' ') in the next generation.
+		given a board and a cell, determine, based on the rules for Conways' GoL if the cell is alive ('X') or dead (' ') in the next generation.
 	*/
 	public static char genNextGenCell(char[][] board, int r, int c){
-		//calculate the number of living neighbors around board [r][c]
+		
+		numNeighbors = countNeighbors(board, r, c);
+		
+		if (board[r][c] = 'X' && numNeighbors != 2 && numNeighbors != 3){
+			return 'X';
+		}
+		else {
+			return '-';
+		}
+			
 		
 		//determine if board[r][c] is living or dead
 			//if living and 2, 3 neighbors, then remain alive
@@ -77,6 +86,10 @@ class Life{
 			}		
 		}
 			
+	}
+	
+	public static char[][] nextBoard(char[][] board){
+		return createNewBoard(board.length, board[0].length);
 	}
 	
 	public static void main(String[] args){
