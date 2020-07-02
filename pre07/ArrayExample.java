@@ -64,9 +64,9 @@ public class ArrayExample{
 		arrayPrime[0] = false;
 		arrayPrime[1] = false;
 		
-		for (int i = 0; i < n; i++){
+		for (int i = 0; i*i < n; i++){
 			
-			if (arrayPrime[i] == true && (i*i) < n) {
+			if (arrayPrime[i] == true) {
 				
 				for (int j = i * i; j < n; j += i){
 					
