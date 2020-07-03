@@ -52,12 +52,46 @@ public class Time{
 	
 	//static method to print the time
 	public static void printTime(Time t) {
-		System.out.printf("%02d:%02d:%04.1f\n", t.hour, t.minute, t.second);
+		String ampm;
+		int hour;
+		
+		if (t.hour >= 12) {
+			ampm = "PM";
+		}
+		else {
+			ampm = "AM";
+		}
+		
+		if (t.hour > 12) {
+			hour = t.hour - 12;
+		}
+		else {
+			hour = t.hour;
+		}
+		
+		System.out.printf("%02d:%02d:%04.1f %S\n", hour, t.minute, t.second, ampm);
 	}
 	
 	//instance method (depends on instance of class Time; uses this. to refer to that instance) to print time by overriding the default toString method
 	public String toString() {
-		return String.format("%02d:%02d:%04.1f\n", this.hour, this.minute, this.second);
+		
+		String ampm;
+		int hour;
+		
+		if (this.hour >= 12) {
+			ampm = "PM";
+		}
+		else {
+			ampm = "AM";
+		}
+		
+		if (this.hour > 12) {
+			hour = this.hour - 12;
+		}
+		else {
+			hour = this.hour;
+		}		
+		return String.format("%02d:%02d:%04.1f %S", hour, this.minute, this.second, ampm);
 	}
 	
 	//equals method that checks for equivalence instead of an identical reference (==); overwrites existing, inherited equals method that actually tests for identical references as well?
@@ -85,5 +119,21 @@ public class Time{
 		}
 		
 		return sum;
+	}
+	
+	//method to add a number of minutes to an instance of time
+	public void addMinutes(int min) {
+		this.minute += min;
+	}
+	
+	//method that returns the number of seconds between the original time and other
+	public double difference(Time other) {
+		double diff = this.second - other.second;
+		
+		if (diff < 0) {
+			diff = -diff;
+		}
+		
+		return diff;
 	}
 }
