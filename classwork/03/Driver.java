@@ -9,18 +9,21 @@ public class Driver{
 	Time.printTime(t);
 	System.out.println(t);
 	Time t2 = t;
-	Time t3 = new Time(11, 59, 59.9);
+	Time t3 = new Time(11, 2, 13.5);
 	//System.out.println(t == t2);
 	//System.out.println(t.equals(t2));
 	System.out.println(t == t3);
 	System.out.println(t.equals(t3));
 	Time t4 = new Time(4, 3, 32.2);
 	System.out.println(t.add(t4));
-	t4.addMinutes(4);
+	//t4.addMinutes(4);
 	System.out.println(t4);
 	System.out.println(t4.difference(t3));
 	Time t5 = new Time(12, 3, 12.3);
 	System.out.println(t5);
+	System.out.println(t4.difference(t5));
+	System.out.println(t4.difference(t4));
+	System.out.println(t4.difference(t3));
     }
 
 

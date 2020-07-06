@@ -132,7 +132,7 @@ public class SuperArray {
 		
 	}
 	
-	
+	/*
 	//for testing purposes
 	public static void main(String[] args) {
 		
@@ -146,7 +146,7 @@ public class SuperArray {
 		System.out.println(Arrays.toString(testArray.data)); //Should print out
 		testArray.add(5);
 		System.out.println(Arrays.toString(testArray.data));
-/* 		testArray.add(5);
+ 		testArray.add(5);
 		System.out.println(Arrays.toString(testArray.data));
 		testArray.add(3);
 		System.out.println(Arrays.toString(testArray.data));
@@ -165,7 +165,7 @@ public class SuperArray {
 		testArray.add(5);
 		System.out.println(Arrays.toString(testArray.data)); //Should not add element to array, since numberElements already maxed
 		testArray.add(5);
-		System.out.println(Arrays.toString(testArray.data)); //Should not add element to array, since numberElements already maxed */
+		System.out.println(Arrays.toString(testArray.data)); //Should not add element to array, since numberElements already maxed 
 		
 		System.out.println(testArray.get(0)); //Should return 3
 		System.out.println(testArray.get(1)); //Should return 5
@@ -198,6 +198,6 @@ public class SuperArray {
 		
 
 		
-	}
+	} */
 	
 }

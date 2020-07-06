@@ -127,7 +127,9 @@ public class Time{
 	}
 	
 	//method that returns the number of seconds between the original time and other
-	public double difference(Time other) {
+	public double differencesec(Time other) {
+		
+		
 		double diff = this.second - other.second;
 		
 		if (diff < 0) {
@@ -135,5 +137,36 @@ public class Time{
 		}
 		
 		return diff;
+	}
+	
+	public Time difference(Time other) {
+		
+		Time timeElapsed = new Time();
+		
+		if (this.hour < other.hour || (this.hour == other.hour && this.minute < other.minute) || (this.hour == other.hour && this.minute == other.minute && this.second < other.second)) {
+				
+			timeElapsed.second = other.second - this.second;
+			timeElapsed.minute = other.minute - this.minute;
+			timeElapsed.hour = other.hour - this.hour;
+		}
+		
+		else {
+			timeElapsed.second = this.second - other.second;
+			timeElapsed.minute = this.minute - other.minute;
+			timeElapsed.hour = this.hour - other.hour;
+		}
+		
+		if (timeElapsed.second < 0) {
+			timeElapsed.second += 60.0;
+			timeElapsed.minute--;
+		}
+		
+		if (timeElapsed.minute < 0) {
+			timeElapsed.minute += 60;
+			timeElapsed.hour--;
+		}
+		
+		return timeElapsed;
+		
 	}
 }
