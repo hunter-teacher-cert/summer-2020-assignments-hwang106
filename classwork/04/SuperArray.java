@@ -37,7 +37,8 @@ public class SuperArray {
 		return this.numberElements == 0;
 	}
 	
-	public String toString() {
+	//cheating method to print SuperArray
+	/* public String toString() {
 		
 		int[] printArray = new int[this.numberElements];
 		
@@ -46,6 +47,24 @@ public class SuperArray {
 		}
 		
 		return Arrays.toString(printArray);
+	} */
+	
+	public String toString() {
+		
+		String arrayString = "[";
+		
+		for (int i = 0; i < this.numberElements - 1; i++) {
+			arrayString += this.data[i] + ", ";
+		} 
+		
+		if (this.numberElements != 0){
+			arrayString += this.data[this.numberElements-1] + "]";
+		}
+		else {
+			arrayString += "]";
+		}
+		return arrayString;
+		
 	}
 	
 	//for testing purposes
