@@ -54,13 +54,37 @@ public class LList {
 	}
 	
 	public void set(int index, String value){
+
+		Node tmp = this.head;
+		
+		
+		for (int i = 0; i < index; i++){
+			if (tmp != null){
+				tmp = tmp.getNext();
+			}
+			else {
+				return;//if index is out of bounds and reaches null, does nothing
+			}
+		}
+		
+		if (tmp != null) { //prevents NullPointerException at boundary
+			tmp.setData(value);		
+		}
+		
+		else {
+			return; //if index is at null, does nothing
+		}
+		
+	}
+	
+	public void insert(int index, String value){
 		if (index > 0) { //for situations where user is not adding to the front
 			//need to find what is currently at that index and before it
 			Node tmpPre = this.head;
 			Node tmpPost = null;
 			
 			for (int i = 0; i < index - 1; i++){
-				if (tmpPre!= null){
+				if (tmpPre != null){
 					tmpPre = tmpPre.getNext();
 				}
 				else {
@@ -131,7 +155,7 @@ public class LList {
 		System.out.println(l.get(-1));
 		System.out.println(l.get(4)); */
 		
-		l.set(4, "Ming");
+		l.insert(0, "Ming");
 		System.out.println(l);
 	}
 	
