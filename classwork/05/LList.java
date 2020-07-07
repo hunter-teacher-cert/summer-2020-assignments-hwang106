@@ -113,6 +113,25 @@ public class LList {
 		
 	}
 	
+	public int search(String key) {
+		
+		Node tmp = this.head;
+		int index = 0;
+		
+		while (tmp != null && tmp.getData() != key) {
+			tmp = tmp.getNext();
+			index++;
+		}
+		
+		if (tmp != null) { //returns index if the whole list wasn't traversed without a match
+			return index;
+		}
+		
+		else {
+			return -1; //error value representing no match found
+		}
+	}
+	
 	public String toString(){
 		String s = "";
 		
@@ -157,6 +176,8 @@ public class LList {
 		
 		l.insert(0, "Ming");
 		System.out.println(l);
+		
+		System.out.println(l.search("Ming"));
 	}
 	
 
