@@ -105,7 +105,7 @@ public class LList {
 		Node tmp = this.head;
 		int index = 0;
 		
-		while (tmp != null && tmp.getData() != key) {
+		while (tmp != null && !tmp.getData().equals(key)) {
 			tmp = tmp.getNext();
 			index++;
 		}
@@ -159,7 +159,7 @@ public class LList {
 				tmp.setNext(tmp.getNext().getNext()); 
 			}
 			
-			else if (tmp.getNext() == null) { //if at boundary condition
+			else if (tmp.getNext() == null) { //if at boundary condition; can just be else; else if was a legacy of previou implementation
 				tmp.setNext(null);
 			}
 		
@@ -197,8 +197,8 @@ public class LList {
 		
 		
 
-		
 		System.out.println(l.search("Ming"));
+		System.out.println(l.search(new String("Ming")));
 		System.out.println(l.length());
 		l.remove(2);
 		System.out.println(l);
