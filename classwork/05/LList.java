@@ -26,33 +26,6 @@ public class LList {
 		return this.head == null;
 	}
 	
-	public String get(int index){ //indexed at 0 like arrays
-		
-		if (index >= 0) { //conditional to check for out of bounds index (less than min)
-		
-			Node tmp = this.head;
-			
-			for (int i = 0; i < index; i++) {
-				if (tmp != null){ //conditional to check for out of bounds index (greater than max)
-					tmp = tmp.getNext();
-				}
-				else { //if the index is out of bounds, exits for loop early
-					return null;
-				} 
-			} 
-			
-			if (tmp != null) { //prevents NullPointerException if 
-				return tmp.getData();
-			}
-			
-			else {
-				return null;
-			}
-		}
-		
-		return null;
-	}
-	
 	public int length(){
 		
 		int length = 0;
@@ -66,6 +39,22 @@ public class LList {
 		return length;
 		
 	}
+	
+	public String get(int index){ //indexed at 0 like arrays
+		
+		if (index >= 0 && index < this.length()) { //conditional to check for out of bounds index (less than min)
+		
+			Node tmp = this.head;
+			
+			for (int i = 0; i < index; i++) {
+				tmp = tmp.getNext();		
+			} 		
+			return tmp.getData();	
+		}
+		
+		return null; //if index is out of bounds
+	}
+	
 	
 	public void set(int index, String value){
 
@@ -215,34 +204,29 @@ public class LList {
 	public static void main(String[] args){
 		LList l = new LList();
 		
-		System.out.println(l.head);
 		l.addFront("Curly");
-		System.out.println(l.head);
-		System.out.println(l.head.getNext());
 		l.addFront("Larry");
-		System.out.println(l.head);
-		System.out.println(l.head.getNext());
 		l.addFront("Huan");
-		System.out.println(l.head);
-		System.out.println(l.head.getNext());
+
 		
 		System.out.println(l);
 		
-/* 		System.out.println(l.get(0));
+	
+ 		System.out.println(l.get(0));
 		System.out.println(l.get(1));
 		System.out.println(l.get(2));
 		System.out.println(l.get(3));
 		System.out.println(l.get(-1));
-		System.out.println(l.get(4)); */
+		System.out.println(l.get(4)); 
 		
-		l.insert(0, "Ming");
+		/* l.insert(0, "Ming");
 		System.out.println(l);
 		
 		System.out.println(l.search("Ming"));
 		System.out.println(l.length());
 		l.remove(1);
 		System.out.println(l);
-		System.out.println(l.length());
+		System.out.println(l.length()); */
 	}
 	
 
