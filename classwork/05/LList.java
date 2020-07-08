@@ -74,36 +74,27 @@ public class LList {
 	}
 	
 	public void insert(int index, String value){
-		if (index > 0) { //for situations where user is not adding to the front
+		if (index > 0 && index <= this.length()) { //for situations where user is not adding to the front
 			//need to find what is currently at that index and before it
 			Node tmpPre = this.head;
 			Node tmpPost = null;
 			
 			for (int i = 0; i < index - 1; i++){
-				if (tmpPre != null){
-					tmpPre = tmpPre.getNext();
-				}
-				else {
-					return;//if index is out of bounds and reaches null, does nothing
-				}
+				tmpPre = tmpPre.getNext();			
 			}
 			
-			if (tmpPre != null) { //prevents NullPointerException at boundary
-				tmpPost = tmpPre.getNext();
-				
-				//create newNode with parameter value, pointing at what was previously at that index
-				Node newNode = new Node(value, tmpPost); 
-				
-				//need to have what was before that index point at newNode		
-				tmpPre.setNext(newNode);
-			}
+			//sets node that was originally at the index 
+			tmpPost = tmpPre.getNext();
 			
-			else {
-				return; //if index is at null, does nothing
-			}
+			//create newNode with parameter value, pointing at what was previously at that index
+			Node newNode = new Node(value, tmpPost); 
+			
+			//need to have what was before that index point at newNode		
+			tmpPre.setNext(newNode);
+
 		}
 		
-		else if (index == 0) { //for situations where user is adding to the front
+		else if (index == 0) { //for situations where user is adding to the front (the reason this is needed because index-1 for 0 is -1 and would exit for loop and do the same thing as index = 1)
 			addFront(value);
 		}
 		
@@ -211,6 +202,10 @@ public class LList {
 		System.out.println(l.get(3));
 		System.out.println(l.get(-1));
 		System.out.println(l.get(4)); 
+		
+		l.insert(3, "Ming");
+		
+		System.out.println(l);
 		
 		/* l.insert(0, "Ming");
 		System.out.println(l);
