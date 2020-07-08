@@ -53,6 +53,20 @@ public class LList {
 		return null;
 	}
 	
+	public int length(){
+		
+		int length = 0;
+		Node tmp = this.head;
+		
+		while (tmp != null) {
+			tmp = tmp.getNext();
+			length++;
+		}
+		
+		return length;
+		
+	}
+	
 	public void set(int index, String value){
 
 		Node tmp = this.head;
@@ -192,7 +206,7 @@ public class LList {
 		}
 		
 		else {
-			return;
+			return; 
 		}
 		
 		
@@ -225,9 +239,10 @@ public class LList {
 		System.out.println(l);
 		
 		System.out.println(l.search("Ming"));
-		
+		System.out.println(l.length());
 		l.remove(1);
 		System.out.println(l);
+		System.out.println(l.length());
 	}
 	
 
