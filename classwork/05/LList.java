@@ -42,7 +42,7 @@ public class LList {
 	
 	public String get(int index){ //indexed at 0 like arrays
 		
-		if (index >= 0 && index < this.length()) { //conditional to check for out of bounds index (less than min)
+		if (index >= 0 && index < this.length()) { //conditional to check for out of bounds index
 		
 			Node tmp = this.head;
 			
@@ -58,24 +58,17 @@ public class LList {
 	
 	public void set(int index, String value){
 
-		Node tmp = this.head;
+		if (index >=0 && index < this.length()) { //conditional to check for out of bounds index; does nothing if out of bounds
+		
+			Node tmp = this.head;
 		
 		
-		for (int i = 0; i < index; i++){
-			if (tmp != null){
+			for (int i = 0; i < index; i++){				
 				tmp = tmp.getNext();
 			}
-			else {
-				return;//if index is out of bounds and reaches null, does nothing
-			}
-		}
-		
-		if (tmp != null) { //prevents NullPointerException at boundary
-			tmp.setData(value);		
-		}
-		
-		else {
-			return; //if index is at null, does nothing
+			
+			tmp.setData(value);					
+
 		}
 		
 	}
