@@ -151,6 +151,53 @@ public class LList {
 		
 	}
 	
+	public void removeFront() {
+		this.head = this.head.getNext();
+	}
+	
+	public void remove(int index) {
+		//simpler but less clean approach is to locate node right before index and change its next reference to the node right after index
+		
+		//more comprehensive approach is to do the above and change the reference of the index node to null (is this necessary though, or will garbage collection eliminate an unnamed node with nothing else referring to it, even when it is referring to something else?)
+		
+		if (index > 0) {//prevents out of bounds index
+		
+			Node tmp = this.head;
+			
+			for (int i = 0; i < index - 1; i++){
+				if (tmp != null) {
+					tmp = tmp.getNext();
+				}
+				else {
+					return; //exits for loop if index is out of bounds
+				}
+			}
+			
+			if (tmp != null && tmp.getNext() != null) {
+				tmp.setNext(tmp.getNext().getNext()); 
+			}
+			
+			else if (tmp.getNext() == null) {
+				tmp.setNext(null);
+			}
+			
+			else {
+				return;
+			}
+		
+		}
+		
+		else if (index == 0) {
+			this.removeFront();
+		}
+		
+		else {
+			return;
+		}
+		
+		
+	}
+	
 	public static void main(String[] args){
 		LList l = new LList();
 		
@@ -178,6 +225,9 @@ public class LList {
 		System.out.println(l);
 		
 		System.out.println(l.search("Ming"));
+		
+		l.remove(1);
+		System.out.println(l);
 	}
 	
 
