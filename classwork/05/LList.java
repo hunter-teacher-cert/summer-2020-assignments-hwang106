@@ -147,29 +147,20 @@ public class LList {
 		
 		//more comprehensive approach is to do the above and change the reference of the index node to null (is this necessary though, or will garbage collection eliminate an unnamed node with nothing else referring to it, even when it is referring to something else?)
 		
-		if (index > 0) {//prevents out of bounds index
+		if (index > 0 && index < this.length()) {//prevents out of bounds index
 		
 			Node tmp = this.head;
 			
 			for (int i = 0; i < index - 1; i++){
-				if (tmp != null) {
-					tmp = tmp.getNext();
-				}
-				else {
-					return; //exits for loop if index is out of bounds
-				}
+				tmp = tmp.getNext();
 			}
 			
-			if (tmp != null && tmp.getNext() != null) {
+			if (tmp.getNext() != null) { //if not at boundary condition
 				tmp.setNext(tmp.getNext().getNext()); 
 			}
 			
-			else if (tmp.getNext() == null) {
+			else if (tmp.getNext() == null) { //if at boundary condition
 				tmp.setNext(null);
-			}
-			
-			else {
-				return;
 			}
 		
 		}
@@ -177,11 +168,7 @@ public class LList {
 		else if (index == 0) {
 			this.removeFront();
 		}
-		
-		else {
-			return; 
-		}
-		
+
 		
 	}
 	
@@ -207,14 +194,15 @@ public class LList {
 		
 		System.out.println(l);
 		
-		/* l.insert(0, "Ming");
-		System.out.println(l);
+		
+		
+
 		
 		System.out.println(l.search("Ming"));
 		System.out.println(l.length());
-		l.remove(1);
+		l.remove(2);
 		System.out.println(l);
-		System.out.println(l.length()); */
+		System.out.println(l.length()); 
 	}
 	
 
