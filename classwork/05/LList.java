@@ -12,6 +12,11 @@ public class LList {
 	
 	
 	public void addFront(String data){
+	
+	if (data == null) {
+		throw new IllegalArgumentException();
+	}//doesn't allow user to put in null for the data of the new Node being added
+	
 	Node newNode = new Node(data);
 
 	// first point the new node to the beginning
@@ -52,7 +57,7 @@ public class LList {
 			return tmp.getData();	
 		}
 		
-		return null; //if index is out of bounds
+		throw new IndexOutOfBoundsException(); //exception if index is out of bounds
 	}
 	
 	
@@ -67,9 +72,13 @@ public class LList {
 				tmp = tmp.getNext();
 			}
 			
-			tmp.setData(value);					
+			tmp.setData(value);
+
+			return;
 
 		}
+		
+		throw new IndexOutOfBoundsException(); //exception if index is out of bounds
 		
 	}
 	
@@ -91,12 +100,17 @@ public class LList {
 			
 			//need to have what was before that index point at newNode		
 			tmpPre.setNext(newNode);
+			
+			return;
 
 		}
 		
 		else if (index == 0) { //for situations where user is adding to the front (the reason this is needed because index-1 for 0 is -1 and would exit for loop and do the same thing as index = 1)
 			addFront(value);
+			return;
 		}
+		
+		throw new IndexOutOfBoundsException(); //exception if index is out of bounds
 		
 	}
 	
@@ -115,7 +129,7 @@ public class LList {
 		}
 		
 		else {
-			return -1; //error value representing no match found
+			throw new NoSuchElementException(); //exception representing no match found
 		}
 	}
 	
@@ -139,6 +153,10 @@ public class LList {
 	}
 	
 	public void removeFront() {
+		if (this.head == null){
+			throw new NoSuchElementException(); //exception to prevent removing the initial null head node from a LList object
+		}
+		
 		this.head = this.head.getNext();
 	}
 	
@@ -157,19 +175,22 @@ public class LList {
 			
 			if (tmp.getNext() != null) { //if not at boundary condition
 				tmp.setNext(tmp.getNext().getNext()); 
+				return;
 			}
 			
-			else if (tmp.getNext() == null) { //if at boundary condition; can just be else; else if was a legacy of previou implementation
+			else if (tmp.getNext() == null) { //if at boundary condition; can just be else; else if was a legacy of previous implementation
 				tmp.setNext(null);
+				return;
 			}
 		
 		}
 		
 		else if (index == 0) {
 			this.removeFront();
+			return;
 		}
 
-		
+		throw new IndexOutOfBoundsException();
 	}
 	
 	public static void main(String[] args){
@@ -186,7 +207,14 @@ public class LList {
  		System.out.println(l.get(0));
 		System.out.println(l.get(1));
 		System.out.println(l.get(2));
-		System.out.println(l.get(3));
+		l.insert(3, "ming");
+		System.out.println(l);
+		l.remove(0);
+		l.remove(0);
+		l.remove(0);
+		l.remove(3);
+		System.out.println(l);
+		/* System.out.println(l.get(3));
 		System.out.println(l.get(-1));
 		System.out.println(l.get(4)); 
 		
@@ -202,7 +230,7 @@ public class LList {
 		System.out.println(l.length());
 		l.remove(2);
 		System.out.println(l);
-		System.out.println(l.length()); 
+		System.out.println(l.length());  */
 	}
 	
 
