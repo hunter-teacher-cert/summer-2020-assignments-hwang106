@@ -62,6 +62,10 @@ public class LList {
 	
 	
 	public void set(int index, String value){
+		
+		if (value == null) {
+			throw new IllegalArgumentException();
+		}
 
 		if (index >=0 && index < this.length()) { //conditional to check for out of bounds index; does nothing if out of bounds
 		
@@ -83,6 +87,11 @@ public class LList {
 	}
 	
 	public void insert(int index, String value){
+		
+		if (value == null) {
+			throw new IllegalArgumentException();
+		}
+		
 		if (index > 0 && index <= this.length()) { //for situations where user is not adding to the front
 			//need to find what is currently at that index and before it
 			Node tmpPre = this.head;
@@ -115,6 +124,10 @@ public class LList {
 	}
 	
 	public int search(String key) {
+		
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
 		
 		Node tmp = this.head;
 		int index = 0;
