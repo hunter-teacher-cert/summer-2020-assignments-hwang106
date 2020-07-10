@@ -34,13 +34,20 @@ class Stack {
 		return this.stackList.getHead();
 	}
 	
+	//this method replaces the top stack with something else without returning any values
+	public void setTop(String data){
+		this.stackList.set(0, data);
+	}
+	
 	public String toString(){
-		String s = "";
+		String s = "--/\\--" + "\n";
 		
 		for (int i = 0; i < this.length; i++){
 			s += this.stackList.get(i);
 			s += "\n";
 		}
+		
+		s += "--\\/--" + "\n";
 		
 		return s;
 	}
@@ -50,6 +57,7 @@ class Stack {
 		test.push("bottom");
 		test.push("middle");
 		test.push("top");
+		test.setTop("new top");
 		System.out.println(test);
 		
 		System.out.println(test.pop());
@@ -59,8 +67,8 @@ class Stack {
 		System.out.println(test);
 		test.pop();
 		System.out.println(test);
-		test.pop();
-		System.out.println(test);
+		
+
 	} 
 	
 }
