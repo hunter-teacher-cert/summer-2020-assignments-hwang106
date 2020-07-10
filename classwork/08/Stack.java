@@ -9,7 +9,6 @@ class Stack {
 	private LList stackList;
 	
 	public Stack(){
-	
 		stackList = new LList();
 		length = 0;
 	}
@@ -20,7 +19,12 @@ class Stack {
 	}
 	
 	public Node pop(){
-		Node top = this.stackList.getHead();
+		Node top = this.stackList.getHead(); //added a getter method for head in LList class
+		
+		if (this.length == 0){
+			throw new NoSuchElementException("What's poppin'; there are no stacks to pop off");
+		} 
+		
 		this.stackList.removeFront();
 		this.length--;
 		return top;
@@ -31,7 +35,6 @@ class Stack {
 	}
 	
 	public String toString(){
-
 		String s = "";
 		
 		for (int i = 0; i < this.length; i++){
@@ -41,7 +44,7 @@ class Stack {
 		
 		return s;
 	}
-	
+		
 	public static void main(String[] args){
 		Stack test = new Stack();
 		test.push("bottom");
@@ -50,7 +53,14 @@ class Stack {
 		System.out.println(test);
 		
 		System.out.println(test.pop());
+		System.out.println(test);
 		System.out.println(test.top());
+		test.pop();
+		System.out.println(test);
+		test.pop();
+		System.out.println(test);
+		test.pop();
+		System.out.println(test);
 	} 
 	
 }
