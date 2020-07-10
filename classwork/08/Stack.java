@@ -22,12 +22,13 @@ class Stack {
 	
 	//returns value of the topmost stack, while removing it from the LList stackList structure.
 	public Node pop(){
-		Node top = this.stackList.getHead(); //added a getter method for head in LList class, also realized this wouldn't be necessary if this method returned a string (could just use the existing get method)
-		
+		//exception thrown if there are no more stacks left to pop
 		if (this.length == 0){
 			throw new NoSuchElementException("What's poppin'? There are no stacks to pop off");
-		} 
+		} 	
 		
+		Node top = this.stackList.getHead(); //added a getter method for head in LList class, also realized this wouldn't be necessary if this method returned a string (could just use the existing get method)
+				
 		this.stackList.removeFront();
 		this.length--;
 		return top;

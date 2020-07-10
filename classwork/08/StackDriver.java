@@ -35,6 +35,7 @@ public class StackDriver{
 		System.out.println("The top of this stack returns " + s1.top());
 		
 		s1.setTop("new top");
+		System.out.println("This is what the stack looks like using setTop \n" + s1);
 		System.out.println("Is this stack empty? \n" + s1.isEmpty());
 		System.out.println("This stack has a size of " + s1.getLength());
 		System.out.println("The top of this stack returns " + s1.top());
