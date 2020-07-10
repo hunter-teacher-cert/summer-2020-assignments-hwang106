@@ -6,15 +6,16 @@ import java.io.*;
 class Stack {
 	
 	private int length;
-	private boolean isFront;
-	private String data;
+	private Node top;
 	
 	public Stack(){
 	
-		data = null;
+		top = null;
 		length = 0;
-		isFront = true;
+	}
 	
+	public void push(String data){
+		
 	}
 	
 	
