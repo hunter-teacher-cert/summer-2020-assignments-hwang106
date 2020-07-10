@@ -22,7 +22,7 @@ class Stack {
 		Node top = this.stackList.getHead(); //added a getter method for head in LList class
 		
 		if (this.length == 0){
-			throw new NoSuchElementException("What's poppin'; there are no stacks to pop off");
+			throw new NoSuchElementException("What's poppin'? There are no stacks to pop off");
 		} 
 		
 		this.stackList.removeFront();
@@ -51,6 +51,10 @@ class Stack {
 		
 		return s;
 	}
+	
+	public boolean isEmpty(){
+		return this.stackList.isEmpty();
+	}
 		
 	public static void main(String[] args){
 		Stack test = new Stack();
@@ -59,15 +63,17 @@ class Stack {
 		test.push("top");
 		test.setTop("new top");
 		System.out.println(test);
+		System.out.println(test.isEmpty());
 		
 		System.out.println(test.pop());
 		System.out.println(test);
 		System.out.println(test.top());
 		test.pop();
 		System.out.println(test);
+		System.out.println(test.isEmpty());
 		test.pop();
 		System.out.println(test);
-		
+		System.out.println(test.isEmpty());
 
 	} 
 	

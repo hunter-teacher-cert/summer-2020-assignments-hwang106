@@ -10,6 +10,10 @@ public class LList {
 		head = null;
 	}
 	
+	public Node getHead() {
+		return this.head;
+	}
+	
 	
 	public void addFront(String data){
 	
@@ -142,7 +146,7 @@ public class LList {
 		}
 		
 		else {
-			throw new NoSuchElementException(); //exception representing no match found
+			throw new NoSuchElementException(); //exception representing no match found (would be useful if the main function depends on this value to continue)
 		}
 	}
 	
@@ -167,7 +171,7 @@ public class LList {
 	
 	public void removeFront() {
 		if (this.head == null){
-			throw new NoSuchElementException(); //exception to prevent removing the initial null head node from a LList object
+			throw new NoSuchElementException("Empty Linked List"); //exception to prevent removing the initial null head node from a LList object
 		}
 		
 		this.head = this.head.getNext();
@@ -208,12 +212,20 @@ public class LList {
 	
 	public static void main(String[] args){
 		LList l = new LList();
-		
+		try {
 		l.addFront("Curly");
 		l.addFront("Larry");
 		l.addFront("Huan");
-
+		l.addFront(null);
+		}
 		
+		catch(Exception e){
+			System.out.println("Yuck");
+			e.printStackTrace();
+			
+		}
+		
+		finally {
 		System.out.println(l);
 		
 	
@@ -225,8 +237,9 @@ public class LList {
 		l.remove(0);
 		l.remove(0);
 		l.remove(0);
-		l.remove(3);
+		//l.remove(3);
 		System.out.println(l);
+		}
 		/* System.out.println(l.get(3));
 		System.out.println(l.get(-1));
 		System.out.println(l.get(4)); 
