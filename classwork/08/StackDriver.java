@@ -18,6 +18,7 @@ public class StackDriver{
 		
 		catch (NoSuchElementException e){
 			System.out.println("What's poppin'? Nothing! You can't pop off an empty stack!");
+			e.printStackTrace();
 		}
 		
 		
@@ -25,10 +26,10 @@ public class StackDriver{
 		System.out.println("This is what the stack looks like after pushing one element \n" + s1);
 		
 		s1.push("middle");
-		System.out.println("This is what the stack looks like after pushing two elements \n" + s1);
+		System.out.println("This is what the stack looks like after pushing another element \n" + s1);
 		
 		s1.push("top");
-		System.out.println("This is what the stack looks like after pushing three elements \n" + s1);
+		System.out.println("This is what the stack looks like after pushing a third element \n" + s1);
 		
 		System.out.println("Is this stack empty? \n" + s1.isEmpty());
 		System.out.println("This stack has a size of " + s1.getLength());
@@ -43,9 +44,10 @@ public class StackDriver{
 		s1.pop();
 		System.out.println("This is what the stack looks like after invoking pop once \n" + s1);
 		s1.pop();
-		System.out.println("This is what the stack looks like after invoking pop twice \n" + s1);
+		System.out.println("This is what the stack looks like after invoking pop again \n" + s1);
 		s1.pop();
-		System.out.println("This is what the stack looks like after invoking pop three times \n" + s1);
+		System.out.println("This is what the stack looks like after invoking pop yet again \n" + s1);
+		System.out.println("The program is about to try to invoke pop on an empty stack; you should expect an exceptional exception.");
 		s1.pop(); //this should cause an exception
 		
 		
