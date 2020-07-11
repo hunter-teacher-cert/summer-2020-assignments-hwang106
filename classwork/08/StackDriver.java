@@ -5,7 +5,7 @@ public class StackDriver{
 	
 	public static void main(String[] args){
 		
-		Stack s1 = new Stack(); //to test out Stack2, just replace with Stack2 s1 = newStack2()
+		Stack s1 = new Stack(); //to test out Stack2, just replace with Stack2 s1 =  newStack2()
 		System.out.println("This is what the initialized empty stack looks like \n" + s1);
 		System.out.println("Is this stack empty? \n" + s1.isEmpty());
 		System.out.println("This stack has a size of " + s1.getLength());
