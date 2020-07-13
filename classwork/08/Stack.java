@@ -3,7 +3,7 @@ import java.io.*;
 
 // 
 
-class Stack {
+class MyStack {
 	
 	private int length;
 	private LList stackList;

@@ -6,7 +6,7 @@ public class Stack2{
 	//private int length; commenting out to use the default size method instead
 	private LinkedList<String> stackList; //wondering about declaring the List interface instead of a specific implementation in case it needs to switch from LinkedList to ArrayList or something else. 
 		
-	public Stack2(){
+	public MyStack2(){
 		//length = 0; 
 		stackList = new LinkedList<String>();
 	}

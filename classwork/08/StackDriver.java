@@ -5,7 +5,7 @@ public class StackDriver{
 	
 	public static void main(String[] args){
 		
-		Stack s1 = new Stack(); //to test out Stack2, just replace with Stack2 s1 =  newStack2()
+		MyStack s1 = new MyStack(); //to test out MyStack2, just replace with MyStack2 s1 =  new MyStack2()
 		System.out.println("This is what the initialized empty stack looks like \n" + s1);
 		System.out.println("Is this stack empty? \n" + s1.isEmpty());
 		System.out.println("This stack has a size of " + s1.getLength());
@@ -31,7 +31,9 @@ public class StackDriver{
 		s1.push("top");
 		System.out.println("This is what the stack looks like after pushing a third element \n" + s1);
 		
-		System.out.println("Is this stack empty? \n" + s1.isEmpty());
+		s1.length();
+		
+		/* System.out.println("Is this stack empty? \n" + s1.isEmpty());
 		System.out.println("This stack has a size of " + s1.getLength());
 		System.out.println("The top of this stack returns " + s1.top());
 		
@@ -52,7 +54,7 @@ public class StackDriver{
 		
 		
 		
-		
+ */		
 	}
 	
 	
