@@ -39,20 +39,25 @@ public class StringStack{
 		//convert String s to stack and reversed version to stack as well
 		Stack<Character> stringToStack = stringToStack(s);
 		Stack<Character> reversedStringStack = stringToStack(reverse(s)); //Temporary implementation; there is probably a more efficient implementation		
-		boolean openParen = false;
 		boolean closedParen = false;
+		boolean openParen = false;
+		
+		//int originalStackSize = stringToStack.size();
+		
 		
 		//iterate/pop through s, looking for cases of "("; return true if found
 		
 		//while stringToStack.size() > 0 
 		while (((openParen && closedParen) || (!openParen && !closedParen)) && (stringToStack.size() > 0) && (reversedStringStack.size() > 0))
 		{
-			for (int i = 0; i < stringToStack.size(); i++){
+			
+			for (int i = 0; i <= stringToStack.size(); i++){
+				openParen = false;
 				char currentPop = stringToStack.pop();
 				
-				if (currentPop == ')'){
+			/*	if (currentPop == ')'){
 					return false;
-				}
+				}*/
 				
 				if (currentPop == '('){
 					openParen = true;
@@ -61,12 +66,13 @@ public class StringStack{
 				
 			}
 			
-			for (int i = 0; i < reversedStringStack.size(); i++){
+			for (int i = 0; i <= reversedStringStack.size(); i++){
+				closedParen = false;
 				char currentPopR = reversedStringStack.pop();
 				
-				if (currentPopR == '('){
+				/*if (currentPopR == '('){
 					return false;
-				}
+				}*/
 				
 				if (currentPopR == ')'){
 					closedParen = true;
@@ -91,7 +97,7 @@ public class StringStack{
 		System.out.println(isPalindrome("Huan"));
 		System.out.println(isPalindrome("racecar"));
 		//System.out.println(stringToStack("racecad").pop());
-		System.out.println(parenCheck("He()ll)o"));
+		System.out.println(parenCheck("He(lloo)oo"));
 		
 	}
 	
