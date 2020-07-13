@@ -32,11 +32,9 @@ public class StringStack{
 	
  	public static boolean parenCheck(String s){
 		
-		//reverse String Stack
-		
-		//have a counter variable to increments if openParen detected and decrements if closedParen detected
-		
-		//if counter variable is ever less than 0, false; if counter variable ends as greater than 0
+		/*This algorithm was an elegant one Sam brought up, but not implemented here (mine is very janky but potentially more broadly applicable): reverse String Stack		
+		have a counter variable to increments if openParen detected and decrements if closedParen detected	
+		if counter variable is ever less than 0, false; if counter variable ends as greater than 0*/
 		
 		//convert String s to stack and reversed version to stack as well
 		Stack<Character> stringToStack = stringToStack(s);
