@@ -48,34 +48,35 @@ public class StringStack{
 		//iterate/pop through s, looking for cases of "("; return true if found
 		
 		//while stringToStack.size() > 0 
-		while (((openParen && closedParen) || (!openParen && !closedParen)) && (stringToStack.size() > 0) && (reversedStringStack.size() > 0))
+		while (((openParen && closedParen) || (!openParen && !closedParen)) && (stringToStack.size() + reversedStringStack.size() > 0))
 		{
+			openParen = false;
+			closedParen = false;			
 			
-			for (int i = 0; i <= stringToStack.size(); i++){
-				openParen = false;
+			for (int i = 0; i < stringToStack.size(); i++){
+
 				char currentPop = stringToStack.pop();
 				
 			/*	if (currentPop == ')'){
 					return false;
 				}*/
 				
-				if (currentPop == '('){
-					openParen = true;
+				if (currentPop == ')'){
+					closedParen = true;
 					break;
 				}
 				
 			}
 			
-			for (int i = 0; i <= reversedStringStack.size(); i++){
-				closedParen = false;
+			for (int i = 0; i < reversedStringStack.size(); i++){
 				char currentPopR = reversedStringStack.pop();
 				
 				/*if (currentPopR == '('){
 					return false;
 				}*/
 				
-				if (currentPopR == ')'){
-					closedParen = true;
+				if (currentPopR == '('){
+					openParen = true;
 					break;
 				}
 			}
@@ -97,7 +98,7 @@ public class StringStack{
 		System.out.println(isPalindrome("Huan"));
 		System.out.println(isPalindrome("racecar"));
 		//System.out.println(stringToStack("racecad").pop());
-		System.out.println(parenCheck("He(lloo)oo"));
+		System.out.println(parenCheck("H()(e(l))loo))(oo"));
 		
 	}
 	
