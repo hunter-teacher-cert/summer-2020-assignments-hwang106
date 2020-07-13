@@ -52,6 +52,10 @@ public class StringStack{
 			for (int i = 0; i < stringToStack.size(); i++){
 				char currentPop = stringToStack.pop();
 				
+				if (currentPop == ')'){
+					return false;
+				}
+				
 				if (currentPop == '('){
 					openParen = true;
 					break;
@@ -61,6 +65,10 @@ public class StringStack{
 			
 			for (int i = 0; i < reversedStringStack.size(); i++){
 				char currentPopR = reversedStringStack.pop();
+				
+				if (currentPopR == '('){
+					return false;
+				}
 				
 				if (currentPopR == ')'){
 					closedParen = true;
@@ -85,7 +93,7 @@ public class StringStack{
 		System.out.println(isPalindrome("Huan"));
 		System.out.println(isPalindrome("racecar"));
 		//System.out.println(stringToStack("racecad").pop());
-		System.out.println(parenCheck("Hello"));
+		System.out.println(parenCheck("He()ll)o"));
 		
 	}
 	
