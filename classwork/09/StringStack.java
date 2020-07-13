@@ -31,6 +31,13 @@ public class StringStack{
 	}
 	
  	public static boolean parenCheck(String s){
+		
+		//reverse String Stack
+		
+		//have a counter variable to increments if openParen detected and decrements if closedParen detected
+		
+		//if counter variable is ever less than 0, false; if counter variable ends as greater than 0
+		
 		//convert String s to stack and reversed version to stack as well
 		Stack<Character> stringToStack = stringToStack(s);
 		Stack<Character> reversedStringStack = stringToStack(reverse(s)); //Temporary implementation; there is probably a more efficient implementation		
@@ -38,18 +45,28 @@ public class StringStack{
 		boolean closedParen = false;
 		
 		//iterate/pop through s, looking for cases of "("; return true if found
-		for (int i = 0; i < s.length(); i++){
-			char currentPop = stringToStack.pop();
-			char currentPopR = reversedStringStack.pop();
-
-			
-			if (currentPop == '('){
-				openParen = true;				
+		
+		//while stringToStack.size() > 0 
+		while (((openParen && closedParen) || (!openParen && !closedParen)) && (stringToStack.size() > 0) && (reversedStringStack.size() > 0))
+		{
+			for (int i = 0; i < stringToStack.size(); i++){
+				char currentPop = stringToStack.pop();
+				
+				if (currentPop == '('){
+					openParen = true;
+					break;
+				}
+				
 			}
-			if (currentPopR == ')'){
-				closedParen = true;
-			}
 			
+			for (int i = 0; i < reversedStringStack.size(); i++){
+				char currentPopR = reversedStringStack.pop();
+				
+				if (currentPopR == ')'){
+					closedParen = true;
+					break;
+				}
+			}
 		}
 		
 		//if found, iterate through reversed s, looking for cases of ")" return true if found
@@ -57,7 +74,7 @@ public class StringStack{
 		//if both are found, repeat process until nothing left to pop
 		
 		//return whether true for all cases
-		return openParen && closedParen;
+		return (openParen && closedParen) || (!openParen && !closedParen);
 	}  
 	 
 	
@@ -68,7 +85,7 @@ public class StringStack{
 		System.out.println(isPalindrome("Huan"));
 		System.out.println(isPalindrome("racecar"));
 		//System.out.println(stringToStack("racecad").pop());
-		System.out.println(parenCheck("H((e)o"));
+		System.out.println(parenCheck("Hello"));
 		
 	}
 	
