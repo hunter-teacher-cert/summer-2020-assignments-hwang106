@@ -15,8 +15,14 @@ public class StringStack{
 			reversedString += stringToStack.pop();
 		}
 		
-		
 		return reversedString;
+	}
+	
+	public static boolean isPalindrome(String s){
+		
+		String reversedString = reverse(s);
+		return reversedString.equals(s);
+		
 	}
 	
 	
@@ -24,6 +30,8 @@ public class StringStack{
 		
 		String s1 = reverse("Huan");
 		System.out.println(s1);
+		System.out.println(isPalindrome("Huan"));
+		System.out.println(isPalindrome("racecar"));
 		
 	}
 	
