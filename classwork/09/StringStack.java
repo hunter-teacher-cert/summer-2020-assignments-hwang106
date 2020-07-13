@@ -39,27 +39,30 @@ public class StringStack{
 		//convert String s to stack and reversed version to stack as well
 		Stack<Character> stringToStack = stringToStack(s);
 		Stack<Character> reversedStringStack = stringToStack(reverse(s)); //Temporary implementation; there is probably a more efficient implementation		
-		boolean closedParen = false;
-		boolean openParen = false;
+		boolean closedParen;
+		boolean openParen;
 		
-		//int originalStackSize = stringToStack.size();
+		int originalStackSize = stringToStack.size();
 		
 		
 		//iterate/pop through s, looking for cases of "("; return true if found
 		
 		//while stringToStack.size() > 0 
-		while (((openParen && closedParen) || (!openParen && !closedParen)) && (stringToStack.size() + reversedStringStack.size() > 0))
-		{
+		
+		do{
 			openParen = false;
 			closedParen = false;			
+			int stackSize = stringToStack.size();
+			int revStackSize = reversedStringStack.size();
+			int stackCheckSize = stackSize + revStackSize - originalStackSize;
 			
-			for (int i = 0; i < stringToStack.size(); i++){
+			for (int i = 0; i < stackCheckSize; i++){
 
 				char currentPop = stringToStack.pop();
 				
-			/*	if (currentPop == ')'){
+				if (currentPop == '('){
 					return false;
-				}*/
+				}
 				
 				if (currentPop == ')'){
 					closedParen = true;
@@ -68,19 +71,20 @@ public class StringStack{
 				
 			}
 			
-			for (int i = 0; i < reversedStringStack.size(); i++){
+			for (int i = 0; i < stackCheckSize; i++){
 				char currentPopR = reversedStringStack.pop();
 				
-				/*if (currentPopR == '('){
+				if (currentPopR == ')'){
 					return false;
-				}*/
+				}
 				
 				if (currentPopR == '('){
 					openParen = true;
 					break;
 				}
 			}
-		}
+		} 
+		while ((openParen && closedParen) && (stringToStack.size() + reversedStringStack.size() - originalStackSize > 0));
 		
 		//if found, iterate through reversed s, looking for cases of ")" return true if found
 		
@@ -93,12 +97,12 @@ public class StringStack{
 	
 	public static void main(String[] args){
 		
-		String s1 = reverse("Huan");
-		System.out.println(s1);
-		System.out.println(isPalindrome("Huan"));
-		System.out.println(isPalindrome("racecar"));
+		//String s1 = reverse("Huan");
+		//System.out.println(s1);
+		//System.out.println(isPalindrome("Huan"));
+		//System.out.println(isPalindrome("racecar"));
 		//System.out.println(stringToStack("racecad").pop());
-		System.out.println(parenCheck("H()(e(l))loo))(oo"));
+		System.out.println(parenCheck("(Hell(o(o)oo()))"));
 		
 	}
 	
