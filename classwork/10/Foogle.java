@@ -35,7 +35,6 @@ public class Foogle
 	 int midValue;
 	 int ceiling = length;
 	 int floor = 0;
-	 //track lowest and highest possible index?
 	  
 	 while (midIndex > 1 && midIndex < length - 1 && midIndex != ceiling && midIndex != floor){
 		  
@@ -46,34 +45,68 @@ public class Foogle
 		}
 		else if (target > midValue){
 			floor = midIndex;
-			midIndex += (ceiling - floor) / 2; //changes midIndex 
-			
-
+			midIndex += (ceiling - floor) / 2;
 		}
 		else {
 			ceiling = midIndex;
 			midIndex -= (ceiling - floor) / 2;
 		}
-		
-
 	}
 	
 	  
 	if (al.get(0).equals(target)){ //using this inelegant check at lower bound to be able to exit the while loop 
 		return 0;
-	}
-	  
+	} 
 	else if (al.get(length-1).equals(target)){ //using this inelegant check at upper bound to be able to exit the while loop
 		return length - 1;
 	}
-	  
-	return -1; //if not found
-	  
+	return -1; //if not found  
   }
   
-  //recursive version
-  public static int binSearch(ArrayList al, int target, int midIndex){
-	  return -1;
+  //recursive version overloading binSearch 
+  public static int binSearch(ArrayList al, int target){
+	  int length = al.size();
+	  int midIndex = length/2;
+	  int ceiling = length;
+	  int floor = 0;
+	  
+	  return binSearch(al, target, floor, ceiling, midIndex);
+	  
+  }
+  public static int binSearch(ArrayList al, int target, int floor, int ceiling, int midIndex){
+		//base case
+		int midValue = (int) al.get(midIndex);
+		int length = al.size();
+		if (target == midValue){
+			return midIndex;
+		}
+		
+		else if (midIndex == ceiling || midIndex == floor){
+			if (midIndex == ceiling && al.get(0).equals(target)){
+				return 0;
+			}
+			else if (midIndex == floor && al.get(length - 1).equals(target)){
+				return length - 1;
+			}
+			return -1;		
+		}
+			
+		
+		
+		else if (target > midValue){
+			floor = midIndex;
+			midIndex += (ceiling - floor) / 2;
+
+		}
+		
+		else if (target < midValue){
+			ceiling = midIndex;
+			midIndex -= (ceiling - floor) / 2;
+			
+		}
+		
+		return binSearch(al, target, floor, ceiling, midIndex);
+
   }
 
 
@@ -174,6 +207,10 @@ public class Foogle
     System.out.println(indexOfSorted(sal04,13));
 	System.out.println(indexOfSorted(sal04,30));
 	System.out.println(indexOfSorted(sal04,50));
+	System.out.println(binSearch(sal04,0));
+    System.out.println(binSearch(sal04,13));
+	System.out.println(binSearch(sal04,30));
+	System.out.println(binSearch(sal04,50));
     /*System.out.println("\n"+"sal05"+":");
     ArrayList sal05 = preAddRand(20,1,5);
     System.out.println(sal05);
