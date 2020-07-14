@@ -30,33 +30,45 @@ public class Foogle
   }//end indexOf()
   
   public static int indexOfSorted(ArrayList al, int target){
-	  int length = al.size();
-	  int midIndex = length/2;
-	  int midValue;
-	  //track lowest and highest possible index?
+	 int length = al.size();
+	 int midIndex = length/2;
+	 int midValue;
+	 int ceiling = length;
+	 int floor = 0;
+	 //track lowest and highest possible index?
 	  
-	  while (midIndex > 1 && midIndex < length - 1){
+	 while (midIndex > 1 && midIndex < length - 1 && midIndex != ceiling && midIndex != floor){
 		  
-		  midValue = (int) al.get(midIndex);
+		midValue = (int) al.get(midIndex);
 	  
-		  if (target == midValue){
-			  return midIndex;
-		  }
-		  else if (target > midValue){
-			midIndex += (length - midIndex) / 2;
-		  }
-		  else {
-			midIndex -= midIndex/2;
-		  }
-	  }
+		if (target == midValue){ //best-case scenario!
+			return midIndex;
+		}
+		else if (target > midValue){
+			floor = midIndex;
+			midIndex += (ceiling - floor) / 2; //changes midIndex 
+			
+
+		}
+		else {
+			ceiling = midIndex;
+			midIndex -= (ceiling - floor) / 2;
+		}
+		
+
+	}
+	
+	if (al.get(midIndex).equals(target)){
+		return midIndex;
+	}
 	  
-	  if (al.get(0).equals(target)){
-		  return 0;
-	  }
+	else if (al.get(0).equals(target)){ //using this inelegant check at lower bound to be able to exit the while loop 
+		return 0;
+	}
 	  
-	  else if (al.get(length-1).equals(target)){
-		  return length - 1;
-	  }
+	else if (al.get(length-1).equals(target)){ //using this inelegant check at upper bound to be able to exit the while loop
+		return length - 1;
+	}
 	  
 		return -1; //if not found
 	  
@@ -159,8 +171,12 @@ public class Foogle
     System.out.println(indexOf(sal03,3));
     System.out.println("\n"+"sal04"+":");*/
     ArrayList sal04 = preAddRand(20,1,3);
+	sal04.set(19, 50);
     System.out.println(sal04);
-    System.out.println(indexOfSorted(sal04,40));
+    System.out.println(indexOfSorted(sal04,13));
+	System.out.println(indexOfSorted(sal04,0));
+	System.out.println(indexOfSorted(sal04,30));
+	System.out.println(indexOfSorted(sal04,50));
     /*System.out.println("\n"+"sal05"+":");
     ArrayList sal05 = preAddRand(20,1,5);
     System.out.println(sal05);
