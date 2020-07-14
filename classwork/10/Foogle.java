@@ -58,11 +58,8 @@ public class Foogle
 
 	}
 	
-	if (al.get(midIndex).equals(target)){
-		return midIndex;
-	}
 	  
-	else if (al.get(0).equals(target)){ //using this inelegant check at lower bound to be able to exit the while loop 
+	if (al.get(0).equals(target)){ //using this inelegant check at lower bound to be able to exit the while loop 
 		return 0;
 	}
 	  
@@ -70,7 +67,7 @@ public class Foogle
 		return length - 1;
 	}
 	  
-		return -1; //if not found
+	return -1; //if not found
 	  
   }
   
@@ -173,8 +170,8 @@ public class Foogle
     ArrayList sal04 = preAddRand(20,1,3);
 	sal04.set(19, 50);
     System.out.println(sal04);
-    System.out.println(indexOfSorted(sal04,13));
 	System.out.println(indexOfSorted(sal04,0));
+    System.out.println(indexOfSorted(sal04,13));
 	System.out.println(indexOfSorted(sal04,30));
 	System.out.println(indexOfSorted(sal04,50));
     /*System.out.println("\n"+"sal05"+":");
