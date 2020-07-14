@@ -3,7 +3,7 @@ import java.util.*;
 
 public class StringStack{
 	
-	public static Stack stringToStack(String s){
+	public static Stack<Character> stringToCharStack(String s){
 		Stack<Character> stringToStack = new Stack<Character>();
 		
 		for (int i = 0; i < s.length(); i++){
@@ -13,12 +13,41 @@ public class StringStack{
 		return stringToStack;
 	}
 	
+	public static Stack<String> stringToSubstringStack(String s){
+		Stack<String> stringStack = new Stack<String>();
+		
+		int index1 = 0;
+		int index2 = s.indexOf(' ', index1);
+		String sub = "";
+		while (index2 != -1){
+			sub = s.substring(index1, index2);
+			stringStack.push(sub);			
+			index1 = index2 + 1;
+			index2 = s.indexOf(' ', index1);
+
+			stringStack.push(" ");
+			 
+		}
+		
+		sub = s.substring(index1, s.length());
+		stringStack.push(sub);
+		
+		return stringStack;
+	}
+	
 	public static String reverse(String s){
-		Stack stringToStack = stringToStack(s);
+		Stack stringToStack;
+		
+		if (s.indexOf(' ') == -1)
+			stringToStack = stringToCharStack(s);
+		else {
+			stringToStack = stringToSubstringStack(s);
+		}
 		String reversedString = "";
+		int stackSize = stringToStack.size();
 		
 		
-		for (int i = 0; i < s.length(); i++){
+		for (int i = 0; i < stackSize; i++){
 			reversedString += stringToStack.pop();
 		}
 		
@@ -26,6 +55,7 @@ public class StringStack{
 	}
 	
 	public static boolean isPalindrome(String s){		
+		
 		String reversedString = reverse(s);
 		return reversedString.equals(s);		
 	}
@@ -33,11 +63,11 @@ public class StringStack{
 	public static boolean parenCheck(String s){
 		
 		int counter = 0;
-		Stack<Character> stringToStack = stringToStack(s);
-		int stackSize = stringToStack.size();
+		Stack<Character> stringToCharStack = stringToCharStack(s);
+		int stackSize = stringToCharStack.size();
 		
 		for (int i = 0; i < stackSize; i++){
-			char currentPop = stringToStack.pop();
+			char currentPop = stringToCharStack.pop();
 			
 			if (currentPop == ')'){
 				counter++;
@@ -54,11 +84,40 @@ public class StringStack{
 		return counter == 0;
 	}
 	
+	/* public static boolean parenCheck2(String s){
+		
+		//3 counters, whatever type of bracket that appears first will change increment counter1
+		//([)] counter2 can never be less than counter1 (i.e. counter 2 needs to resolve to 0 before counter1)
+		
+		int counter1 = 0;
+		int counter2 = 0;
+		int counter3 = 0;
+		Stack<Character> stringToCharStack = stringToCharStack(s);
+		int stackSize = stringToCharStack.size();
+		
+		for (int i = 0; i < stackSize; i++){
+			char currentPop = stringToCharStack.pop();
+			
+			if (currentPop == ')'){
+				counter++;
+			}
+			
+			if (currentPop == '('){
+				counter--;
+			}
+			
+			if (counter < 0){
+				return false;
+			}
+		}
+		return counter == 0;
+	} */
+	
  	/* public static boolean parenCheck(String s){
 		
 		//convert String s to stack and reversed version to stack as well
-		Stack<Character> stringToStack = stringToStack(s);
-		Stack<Character> reversedStringStack = stringToStack(reverse(s)); //Temporary implementation; there is probably a more efficient implementation		
+		Stack<Character> stringToStack = stringToCharStack(s);
+		Stack<Character> reversedStringStack = stringToCharStack(reverse(s)); //Temporary implementation; there is probably a more efficient implementation		
 		boolean closedParen;
 		boolean openParen;
 		
@@ -117,11 +176,16 @@ public class StringStack{
 	
 	public static void main(String[] args){
 		
-		//String s1 = reverse("Huan");
-		//System.out.println(s1);
-		//System.out.println(isPalindrome("Huan"));
-		//System.out.println(isPalindrome("racecar"));
-		//System.out.println(stringToStack("racecad").pop());
+		String s1 = reverse("Huan");
+		System.out.println(s1);
+		System.out.println(isPalindrome("Huan"));
+		System.out.println(isPalindrome("racecar"));
+		System.out.println(stringToCharStack("racecad").pop());
+		System.out.println(stringToSubstringStack("Who am I really?    really?"));
+		System.out.println(reverse("WhoamIreally?"));
+		System.out.println(reverse("Who am I really?"));
+		System.out.println(reverse("i am what am i"));
+		System.out.println(isPalindrome("i am what am i"));
 		System.out.println(parenCheck("(x+3)")); //true
 		System.out.println(parenCheck("(x+(3)")); //false
 		System.out.println(parenCheck("(x+(3))")); //true
