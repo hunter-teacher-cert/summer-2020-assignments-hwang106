@@ -63,8 +63,8 @@ public class StringStack{
 		return reversedString.equals(s);		
 	}
 	
-	public static boolean parenCheck(String s){
-		//a more complex version of this method exists two methods below (commented out), but it only works for special cases
+/* 	public static boolean parenCheck(String s){
+		//a more complex version of this method exists three methods below (commented out), but it only works for special cases
 		int counter = 0;
 		Stack<Character> stringToCharStack = stringToCharStack(s);
 		int stackSize = stringToCharStack.size();
@@ -85,7 +85,42 @@ public class StringStack{
 			}
 		}
 		return counter == 0;
-	}
+	} */
+	
+	//a method that actually utitilizes "strengths" of stack data structures
+	public static boolean parenCheck(String s){
+		Stack<Character> stackStage = new Stack<Character>();
+		char c;
+		
+		for (int i = 0; i < s.length(); i++){
+			c = s.charAt(i);
+			
+			if (c == '(' || c == '{' || c == '['){
+				stackStage.push(c);
+			}
+			
+			if (c == ')' || c == '}' || c == ']'){
+				if (stackStage.empty()){
+					return false;
+				}
+				
+				char currentPop = stackStage.pop();
+					if ((c == ')' && currentPop != '(') ||
+						(c == '}' && currentPop != '{') ||
+						(c == ']' && currentPop != '[')){
+							return false;
+						}
+						
+						
+				}
+				
+			}
+			return stackStage.empty();
+		}
+		
+		
+		
+	
 	
 	public static boolean parenCheck2(String s){
 		
@@ -156,7 +191,7 @@ public class StringStack{
 		return c1 == 0 && c2 == 0 && c3 == 0;
 	}
 	
- 	/* public static boolean parenCheck(String s){
+ 	/*public static boolean parenCheck(String s){
 		//only works for special cases where there are only nested parentheses; does not work for consecutive open/closed parentheses
 		
 		//convert String s to stack and reversed version to stack as well
@@ -215,8 +250,8 @@ public class StringStack{
 		
 		//return whether true for all cases
 		return (openParen && closedParen) || (!openParen && !closedParen);
-	}  
-	 */ 
+	}*/  
+	 
 	
 	public static void main(String[] args){
 		
@@ -230,13 +265,13 @@ public class StringStack{
 		System.out.println(reverse("Who am I really?"));
 		System.out.println(reverse("i am what am i"));
 		System.out.println(isPalindrome("i am what am i"));
-		System.out.println(parenCheck2("(x+3)")); //true
-		System.out.println(parenCheck2("(x+(3)")); //false
-		System.out.println(parenCheck2("(x+(3))")); //true
-		System.out.println(parenCheck2("x+(x+3)")); //true
-		System.out.println(parenCheck2(")(x+3)")); //false
-		System.out.println(parenCheck2(")(x+3)(")); //false
-	System.out.println(parenCheck2("{[(]x+3)}(x+2)")); //should be true but will be false with second implemenation of parenCheck 
+		System.out.println(parenCheck("(x+3)")); //true
+		System.out.println(parenCheck("(x+(3)")); //false
+		System.out.println(parenCheck("(x+(3))")); //true
+		System.out.println(parenCheck("x+(x+3)")); //true
+		System.out.println(parenCheck(")(x+3)")); //false
+		System.out.println(parenCheck(")(x+3)(")); //false
+	System.out.println(parenCheck("{[(]x+3)}(x+2)")); //false
 		
 		
 	}
