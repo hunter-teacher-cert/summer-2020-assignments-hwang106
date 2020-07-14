@@ -16,7 +16,7 @@
 import java.io.*;
 import java.util.*;
 
-public class indexOfgle
+public class Foogle
 {
 
   //  indexOf target if it exists. Traverses ArrayList until element matches target, then returns that index. If not found, returns -1
@@ -28,6 +28,44 @@ public class indexOfgle
     }
     return -1;
   }//end indexOf()
+  
+  public static int indexOfSorted(ArrayList al, int target){
+	  int length = al.size();
+	  int midIndex = length/2;
+	  int midValue;
+	  //track lowest and highest possible index?
+	  
+	  while (midIndex > 1 && midIndex < length - 1){
+		  
+		  midValue = (int) al.get(midIndex);
+	  
+		  if (target == midValue){
+			  return midIndex;
+		  }
+		  else if (target > midValue){
+			midIndex += (length - midIndex) / 2;
+		  }
+		  else {
+			midIndex -= midIndex/2;
+		  }
+	  }
+	  
+	  if (al.get(0).equals(target)){
+		  return 0;
+	  }
+	  
+	  else if (al.get(length-1).equals(target)){
+		  return length - 1;
+	  }
+	  
+		return -1; //if not found
+	  
+  }
+  
+  //recursive version
+  public static int binSearch(ArrayList al, int target, int midIndex){
+	  return -1;
+  }
 
 
   //  populates an ArrayList with custom number of items with integer numbers between lo and hi
@@ -119,11 +157,11 @@ public class indexOfgle
     ArrayList sal03 = preAddRand(5,0,100);
     System.out.println(sal03);
     System.out.println(indexOf(sal03,3));
-    System.out.println("\n"+"sal04"+":");
-    ArrayList sal04 = preAddRand(20,0,3);
+    System.out.println("\n"+"sal04"+":");*/
+    ArrayList sal04 = preAddRand(20,1,3);
     System.out.println(sal04);
-    System.out.println(indexOf(sal04,3));
-    System.out.println("\n"+"sal05"+":");
+    System.out.println(indexOfSorted(sal04,40));
+    /*System.out.println("\n"+"sal05"+":");
     ArrayList sal05 = preAddRand(20,1,5);
     System.out.println(sal05);
     System.out.println(indexOf(sal05,3));
