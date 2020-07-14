@@ -19,13 +19,13 @@ public class StringStack{
 		int index1 = 0;
 		int index2 = s.indexOf(' ', index1);
 		String sub = "";
-		while (index2 != -1){
+		while (index2 != -1){ //-1 is the default value when the value cannot be found within specified indices
 			sub = s.substring(index1, index2);
 			stringStack.push(sub);			
 			index1 = index2 + 1;
 			index2 = s.indexOf(' ', index1);
 
-			stringStack.push(" ");
+			stringStack.push(" "); //kind of a cheap way to make sure the space bewteen substrings is pushed as a stack element (specifically for the purposes of reverse)
 			 
 		}
 		
@@ -37,12 +37,15 @@ public class StringStack{
 	
 	public static String reverse(String s){
 		Stack stringToStack;
-		
-		if (s.indexOf(' ') == -1)
+		//checks for space delimiter to decide whether to create a CharStack or a SubstringStack
+		if (s.indexOf(' ') == -1){
 			stringToStack = stringToCharStack(s);
+		}
 		else {
 			stringToStack = stringToSubstringStack(s);
 		}
+		
+		//initializes reversedString and sets original stack size for use in for loop, which will dynamically change the stack size with each pop
 		String reversedString = "";
 		int stackSize = stringToStack.size();
 		
@@ -55,13 +58,13 @@ public class StringStack{
 	}
 	
 	public static boolean isPalindrome(String s){		
-		
+		//could potentially be more efficient if only half of the String is reversed and checked with first half of existing String, but hey reverse method already exists!
 		String reversedString = reverse(s);
 		return reversedString.equals(s);		
 	}
 	
 	public static boolean parenCheck(String s){
-		
+		//a more complex version of this method exists two methods below (commented out), but it only works for special cases
 		int counter = 0;
 		Stack<Character> stringToCharStack = stringToCharStack(s);
 		int stackSize = stringToCharStack.size();
@@ -73,7 +76,7 @@ public class StringStack{
 				counter++;
 			}
 			
-			if (currentPop == '('){
+			else if (currentPop == '('){
 				counter--;
 			}
 			
@@ -84,14 +87,17 @@ public class StringStack{
 		return counter == 0;
 	}
 	
-	/* public static boolean parenCheck2(String s){
+	public static boolean parenCheck2(String s){
 		
-		//3 counters, whatever type of bracket that appears first will change increment counter1
-		//([)] counter2 can never be less than counter1 (i.e. counter 2 needs to resolve to 0 before counter1)
+		//3 counters, whatever type of bracket that appears first will change increment c1
+		//([)] c2 can never be less than c1 (i.e. counter 2 needs to resolve to 0 before c1)
 		
-		int counter1 = 0;
-		int counter2 = 0;
-		int counter3 = 0;
+		int c1 = 0; //counter for ()
+		int c2 = 0; //counter for {}
+		int c3 = 0; //counter for []
+		int c1p = 0; //place to store prior values of c1 before increment/decrement for false check purposes
+		int c2p = 0; //"" but for c2
+		int c3p = 0; // "" but for c3
 		Stack<Character> stringToCharStack = stringToCharStack(s);
 		int stackSize = stringToCharStack.size();
 		
@@ -99,21 +105,59 @@ public class StringStack{
 			char currentPop = stringToCharStack.pop();
 			
 			if (currentPop == ')'){
-				counter++;
+				c1p = c1;
+				c1++;
+			}			
+			else if (currentPop == '('){
+				c1p = c1;
+				c1--;
 			}
 			
-			if (currentPop == '('){
-				counter--;
+			else if (currentPop == '}'){
+				c2p = c2;
+				c2++;
+			}
+			else if (currentPop == '{'){
+				c2p = c2;
+				c2--;
 			}
 			
-			if (counter < 0){
+			else if (currentPop == ']'){
+				c3p = c3;
+				c3++;
+			}
+			else if (currentPop == '['){
+				c3--;
+			}
+			
+			if (c1 < 0 || c2 < 0 || c3 < 0){
 				return false;
 			}
+			
+			if (c1 > c1p && c2 <= c2p && c3 <= c3p && c2 != 0 && c3 != 0){
+				if (currentPop == '{' || currentPop == '['){
+					return false;
+				}
+			}
+			
+			if (c2 > c2p && c1 <= c1p && c3 <= c3p && c1 != 0 && c3 != 0){
+				if (currentPop == '(' || currentPop == '['){
+					return false;
+				}
+			}
+			
+			if (c3 > c3p && c1 <= c1p && c2 <= c2p && c1 != 0 && c2 != 0){
+				if (currentPop == '(' || currentPop == '{'){
+					return false;
+				}
+			}
+			
 		}
-		return counter == 0;
-	} */
+		return c1 == 0 && c2 == 0 && c3 == 0;
+	}
 	
  	/* public static boolean parenCheck(String s){
+		//only works for special cases where there are only nested parentheses; does not work for consecutive open/closed parentheses
 		
 		//convert String s to stack and reversed version to stack as well
 		Stack<Character> stringToStack = stringToCharStack(s);
@@ -186,13 +230,14 @@ public class StringStack{
 		System.out.println(reverse("Who am I really?"));
 		System.out.println(reverse("i am what am i"));
 		System.out.println(isPalindrome("i am what am i"));
-		System.out.println(parenCheck("(x+3)")); //true
-		System.out.println(parenCheck("(x+(3)")); //false
-		System.out.println(parenCheck("(x+(3))")); //true
-		System.out.println(parenCheck("x+(x+3)")); //true
-		System.out.println(parenCheck(")(x+3)")); //false
-		System.out.println(parenCheck(")(x+3)(")); //false
-		System.out.println(parenCheck("(x+3)(x+2)")); //should be true but will be false with second implemenation of parenCheck 
+		System.out.println(parenCheck2("(x+3)")); //true
+		System.out.println(parenCheck2("(x+(3)")); //false
+		System.out.println(parenCheck2("(x+(3))")); //true
+		System.out.println(parenCheck2("x+(x+3)")); //true
+		System.out.println(parenCheck2(")(x+3)")); //false
+		System.out.println(parenCheck2(")(x+3)(")); //false
+	System.out.println(parenCheck2("{[(]x+3)}(x+2)")); //should be true but will be false with second implemenation of parenCheck 
+		
 		
 	}
 	
