@@ -64,7 +64,7 @@ public class indexOfgle
       //retArr.add( Math.random() ); // [0,1)
       //retArr.add( (int)Math.random() ); //0
       //retArr.add( (int)(hi * Math.random()) ); // [0,hi)
-      //retArr.add( lo + (int)(hi * Math.random()) ); // [lo,hi)
+      //retArr.add( lo + (int)(hi * Math.random()) ); // [lo, lo + hi)
       //System.out.println(retArr.get(i-1));  //diag.
       retArr.add( (int)retArr.get(i-1)
                   + lo + (int)(hi * Math.random()) );
