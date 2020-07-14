@@ -63,8 +63,8 @@ public class indexOfgle
       //System.out.println(i);  //diagnostic under-the-hood view
       //retArr.add( Math.random() ); // [0,1)
       //retArr.add( (int)Math.random() ); //0
-      //retArr.add( (int)(hi * Math.random()) ); // [0,?)
-      //retArr.add( lo + (int)(hi * Math.random()) ); // [?,?)
+      //retArr.add( (int)(hi * Math.random()) ); // [0,hi)
+      //retArr.add( lo + (int)(hi * Math.random()) ); // [lo,hi)
       //System.out.println(retArr.get(i-1));  //diag.
       retArr.add( (int)retArr.get(i-1)
                   + lo + (int)(hi * Math.random()) );
