@@ -29,7 +29,35 @@ public class Foogle
     return -1;
   }//end indexOf()
   
+  //iterative version of binSearch, called indexOfSorted
+  
   public static int indexOfSorted(ArrayList al, int target){
+	  int length = al.size();
+	  int midIndex;
+	  int midValue;
+	  int ceiling = length - 1;
+	  int floor = 0;
+	  
+	  while (ceiling >= floor){
+		  midIndex = (ceiling + floor) / 2;
+		  midValue = (int) al.get(midIndex);
+		  
+		  if (target == midValue ){
+			  return midIndex;
+		  }
+		  
+		  if (target > midValue){
+			  floor = midIndex + 1;
+		  }
+		  
+		  else {
+			  ceiling = midIndex - 1;
+		  }
+	  }
+	  return -1;
+  }
+  
+  /* public static int indexOfSorted(ArrayList al, int target){
 	 int length = al.size();
 	 int midIndex = length/2;
 	 int midValue;
@@ -61,7 +89,7 @@ public class Foogle
 		return length - 1;
 	}
 	return -1; //if not found  
-  }
+  } */
   
   //recursive version overloading binSearch 
   public static int binSearch(ArrayList al, int target){
@@ -73,6 +101,8 @@ public class Foogle
 	  return binSearch(al, target, floor, ceiling, midIndex);
 	  
   }
+  
+  //wondering about the benefits of using a helper method vs overloading in this particular situation
   public static int binSearch(ArrayList al, int target, int floor, int ceiling, int midIndex){
 		//base case
 		int midValue = (int) al.get(midIndex);
