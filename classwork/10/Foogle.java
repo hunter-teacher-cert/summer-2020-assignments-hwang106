@@ -57,6 +57,37 @@ public class Foogle
 	  return -1;
   }
   
+  public static int binSearch(ArrayList al, int target){
+	  int floor = 0;
+	  int ceiling = al.size() - 1;
+	  
+	  return binSearch(al, target, floor, ceiling);
+  }
+  
+  public static int binSearch(ArrayList al, int target, int floor, int ceiling){
+	  int midIndex = (ceiling + floor) / 2;
+	  int midValue = (int) al.get(midIndex);
+	  
+	  if (target == midValue){
+		  return midIndex;
+	  }
+	  
+	  if (ceiling <= floor){
+		  return -1;
+	  }
+	  
+	  if (target > midValue){
+		  floor = midIndex + 1;
+	  }
+	  
+	  else{
+		  ceiling = midIndex - 1;
+	  }
+	  
+	  return binSearch(al, target, floor, ceiling);
+  }
+  
+  //legacy version of indexOfSorted
   /* public static int indexOfSorted(ArrayList al, int target){
 	 int length = al.size();
 	 int midIndex = length/2;
@@ -91,7 +122,8 @@ public class Foogle
 	return -1; //if not found  
   } */
   
-  //recursive version overloading binSearch 
+  
+  /* legacy version of recursive binSearch //recursive version overloading binSearch 
   public static int binSearch(ArrayList al, int target){
 	  int length = al.size();
 	  int midIndex = length/2;
@@ -102,9 +134,9 @@ public class Foogle
 	  
   }
   
-  //wondering about the benefits of using a helper method vs overloading in this particular situation
+  // wondering about the benefits of using a helper method vs overloading in this particular situation
   public static int binSearch(ArrayList al, int target, int floor, int ceiling, int midIndex){
-		//base case
+		// base case
 		int midValue = (int) al.get(midIndex);
 		int length = al.size();
 		if (target == midValue){
@@ -138,7 +170,7 @@ public class Foogle
 		return binSearch(al, target, floor, ceiling, midIndex);
 
   }
-
+ */
 
   //  populates an ArrayList with custom number of items with integer numbers between lo and hi
   public static ArrayList randPopArray(int numItems, int lo, int hi)
