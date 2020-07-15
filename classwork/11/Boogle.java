@@ -105,33 +105,60 @@ public class Boogle
 
     // find and return the index of the smallest value in the
     // ArrayList al from index lo to index hi inclusive 
-    public static int findSmallest(ArrayList<Integer> al, int lo, int hi){
+   public static int findSmallest(ArrayList<Integer> al, int lo, int hi){
 	// assume the first item is the smallest - call it our smallest so far
 	int size = al.size();
-	if (lo < 0 || hi < 0 || lo >= size || hi >= size){
-		throw new IndexOutOfBoundsException("You picked an lo or hi that is not within the bounds of the array");
-	}
-	
-	if (lo > hi){
-		throw new IndexOutOfBoundsException("Lo can't be greater than Hi");
-	}
-	
-	
-	int min = (int) al.get(0);
-	int minIndex = 0;
-
-	// loop over all the items
-	for (int i = 1 + lo; i < hi; i++){
-		int temp = (int) al.get(i);
-		if (temp < min){
-			min = temp;
-			minIndex = i;
+		if (lo < 0 || hi < 0 || lo >= size || hi >= size){
+			throw new IndexOutOfBoundsException("You picked an lo or hi that is not within the bounds of the array");
 		}
-	}
-	
-	return minIndex; 
+		
+		if (lo > hi){
+			throw new IndexOutOfBoundsException("Lo can't be greater than Hi");
+		}
+		
+		
+		int min = (int) al.get(lo);
+		int minIndex = lo;
+
+		// loop over all the items
+		for (int i = 1 + lo; i < hi; i++){
+			int temp = (int) al.get(i);
+			if (temp < min){
+				min = temp;
+				minIndex = i;
+			}
+		}
+		
+		return minIndex; 
 
     }
+	
+	public static void sortArray(ArrayList<Integer> al){
+		
+		//store size of array
+		int hi = al.size() - 1;
+		int tempLoValue;
+		int smallestIndex;
+		int smallestValue;
+		
+		//create loop where lo increments, and lo represents the lo parameter for findSmallest only needs to go to hi - 1, since the last doesn't need to be sorted
+		for (int lo = 0; lo < hi - 1; lo++){
+			smallestIndex = findSmallest(al, lo, hi);
+			smallestValue = al.get(smallestIndex);
+			tempLoValue = al.get(lo);
+			al.set(lo, smallestValue);
+			al.set(smallestIndex, tempLoValue);
+		}
+		//run findSmallest on entire array and store the Index
+		
+		//store the low index value in a temp variable
+		
+		//replace low index value with value of found Index
+		
+		//replace original index value with store temp variable
+	}
+	
+	
 
 
   //##################################################
@@ -149,6 +176,8 @@ public class Boogle
 	  //smallIndex = findSmallest(slist,20,slist.size());
       System.out.println(slist);
       System.out.printf("Smallest is at slist[%d] and is %d\n",smallIndex,slist.get(smallIndex));
+	  sortArray(slist);
+	  System.out.println(slist);
       
 
 
