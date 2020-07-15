@@ -133,7 +133,7 @@ public class Boogle
 
     }
 	
-	public static void sortArray(ArrayList<Integer> al){
+	public static void selectionSort(ArrayList<Integer> al){
 		
 		//store size of array
 		int hi = al.size() - 1;
@@ -143,19 +143,16 @@ public class Boogle
 		
 		//create loop where lo increments, and lo represents the lo parameter for findSmallest only needs to go to hi - 1, since the last doesn't need to be sorted
 		for (int lo = 0; lo < hi; lo++){
+			//run findSmallest on entire array and store the Index and the value
 			smallestIndex = findSmallest(al, lo, hi);
 			smallestValue = al.get(smallestIndex);
+			//store the low index value in a temp variable
 			tempLoValue = al.get(lo);
+			//replace low index value with value of found Index
 			al.set(lo, smallestValue);
+			//replace original index value with stored temp variable
 			al.set(smallestIndex, tempLoValue);
 		}
-		//run findSmallest on entire array and store the Index
-		
-		//store the low index value in a temp variable
-		
-		//replace low index value with value of found Index
-		
-		//replace original index value with store temp variable
 	}
 	
 	
@@ -164,7 +161,7 @@ public class Boogle
   //##################################################
   //##################################################
 
-
+//
   public static void main( String[] args )
   {
 
@@ -176,7 +173,7 @@ public class Boogle
 	  //smallIndex = findSmallest(slist,20,slist.size());
       System.out.println(slist);
       System.out.printf("Smallest is at slist[%d] and is %d\n",smallIndex,slist.get(smallIndex));
-	  sortArray(slist);
+	  selectionSort(slist);
 	  System.out.println(slist);
       
 
