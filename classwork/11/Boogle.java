@@ -121,7 +121,7 @@ public class Boogle
 		int minIndex = lo;
 
 		// loop over all the items
-		for (int i = 1 + lo; i < hi; i++){
+		for (int i = 1 + lo; i <= hi; i++){
 			int temp = (int) al.get(i);
 			if (temp < min){
 				min = temp;
@@ -142,7 +142,7 @@ public class Boogle
 		int smallestValue;
 		
 		//create loop where lo increments, and lo represents the lo parameter for findSmallest only needs to go to hi - 1, since the last doesn't need to be sorted
-		for (int lo = 0; lo < hi - 1; lo++){
+		for (int lo = 0; lo < hi; lo++){
 			smallestIndex = findSmallest(al, lo, hi);
 			smallestValue = al.get(smallestIndex);
 			tempLoValue = al.get(lo);
