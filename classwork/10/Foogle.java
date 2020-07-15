@@ -218,72 +218,22 @@ public class Foogle
 
   public static void main( String[] args )
   {
-    // test battery for randPopArray()
-    /*~~~~v~~~~~~move~me~down~~~1~block~at~a~time~~~~~~~~~~v~~~~
-    System.out.println("\n"+"al000"+":");
-    ArrayList al000 = randPopArray(0,0,0);
-    System.out.println(al000);
-    System.out.println(indexOf(al000,3));
-    System.out.println("\n"+"al01"+":");
-    ArrayList al01 = randPopArray(5,0,100);
-    System.out.println(al01);
-    System.out.println(indexOf(al01,3));
-    System.out.println("\n"+"al02"+":");
-    ArrayList al02 = randPopArray(5,3,10);
-    System.out.println(al02);
-    System.out.println(indexOf(al02,3));
-    System.out.println("\n"+"al05"+":");
-    ArrayList al05 = randPopArray(20,1,5);
-    System.out.println(al05);
-    System.out.println(indexOf(al05,3));
-      ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~*/
-
-
-    // test battery for preAddRand()
-    /*~~~~v~~~~~~move~me~down~~~1~block~at~a~time~~~~~~~~~~v~~~~
-    System.out.println("\n"+"sal000"+":");
-    ArrayList sal000 = preAddRand(0,0,0);
-    System.out.println(sal000);
-    System.out.println(indexOf(sal000,3));
-    System.out.println("\n"+"sal00"+":");
-    ArrayList sal00 = preAddRand(5,0,100);
-    System.out.println(sal00);
-    System.out.println(indexOf(sal00,3));
-    System.out.println("\n"+"sal01"+":");
-    ArrayList sal01 = preAddRand(5,0,100);
-    System.out.println(sal01);
-    System.out.println(indexOf(sal01,3));
-    System.out.println("\n"+"sal02"+":");
-    ArrayList sal02 = preAddRand(5,3,100);
-    System.out.println(sal02);
-    System.out.println(indexOf(sal02,3));
-    System.out.println("\n"+"sal03"+":");
-    ArrayList sal03 = preAddRand(5,0,100);
-    System.out.println(sal03);
-    System.out.println(indexOf(sal03,3));
-    System.out.println("\n"+"sal04"+":");*/
-    ArrayList sal04 = preAddRand(20,1,3);
-	sal04.set(19, 50);
+    ArrayList sal04 = preAddRand(20,1,3); //creates non-repeating sorted array with size 20, with maximum increases of 3
+	sal04.set(19, 50); //non-random value for last item to check upper-bound in tests
     System.out.println(sal04);
-	System.out.println(indexOfSorted(sal04,0));
-    System.out.println(indexOfSorted(sal04,13));
-	System.out.println(indexOfSorted(sal04,30));
-	System.out.println(indexOfSorted(sal04,50));
-	System.out.println(binSearch(sal04,0));
-    System.out.println(binSearch(sal04,13));
-	System.out.println(binSearch(sal04,30));
-	System.out.println(binSearch(sal04,50));
-    /*System.out.println("\n"+"sal05"+":");
-    ArrayList sal05 = preAddRand(20,1,5);
-    System.out.println(sal05);
-    System.out.println(indexOf(sal05,3));
-      ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~*/
+	System.out.println("This is the index of 0 using linear search: " + indexOf(sal04,0));
+    System.out.println("This is the index of 13 using linear search: " + indexOf(sal04,13));
+	System.out.println("This is the index of 30 using linear search: " + indexOf(sal04,30));
+	System.out.println("This is the index of 50 using linear search: " + indexOf(sal04,50));
+	System.out.println("This is the index of 0 using iterative binary search: " + indexOfSorted(sal04,0));
+    System.out.println("This is the index of 13 using iterative binary search: " + indexOfSorted(sal04,13));
+	System.out.println("This is the index of 30 using iterative binary search: " + indexOfSorted(sal04,30));
+	System.out.println("This is the index of 50 using iterative binary search: " + indexOfSorted(sal04,50));
+	System.out.println("This is the index of 0 using recursive binary search: " + binSearch(sal04,0));
+    System.out.println("This is the index of 13 using recursive binary search: " + binSearch(sal04,13));
+	System.out.println("This is the index of 30 using recursive binary search: " + binSearch(sal04,30));
+	System.out.println("This is the index of 50 using recursive binary search: " + binSearch(sal04,50));
 
-    /*
-    System.out.println("\n"+"al"+":");
-    ArrayList al = randPopArray(,0,100);
-    System.out.println(al);
-    */
   }//end main
 
 }//end class
