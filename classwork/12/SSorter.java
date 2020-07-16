@@ -101,6 +101,25 @@ public class SSorter
     }//copy
     return sub; 
   }//slice
+  
+  
+  //recursive method to divide list until base case and then merge the sorted lists until one list
+  public static ArrayList<Integer> mergeSort(ArrayList<Integer> al){
+	int size = al.size();
+	
+	//base case
+	if (size == 1){
+		return al;
+	}
+	
+	int midIndex = size / 2;
+	
+	ArrayList<Integer> branch1 = mergeSort(slice(al, 0, midIndex));
+	ArrayList<Integer> branch2 = mergeSort(slice(al, midIndex, size));
+	
+	return merge(branch1, branch2);
+	
+  }
 
 
 
@@ -109,18 +128,21 @@ public class SSorter
 
   public static void main( String[] args )
   {
-    ArrayList<Integer> randos = prestoArrayListo(100000, 0, 100);
+    ArrayList<Integer> randos = prestoArrayListo(20, 0, 100);
+	
+	System.out.println(randos);
+	System.out.println(mergeSort(randos));
 
     // System.out.println(randos);
 
-    long start = System.currentTimeMillis();
+    //long start = System.currentTimeMillis();
 
-    selectionSort(randos);
+    //selectionSort(randos);
 
-    long elapsed = System.currentTimeMillis() - start;
+    //long elapsed = System.currentTimeMillis() - start;
 	
     // System.out.println(randos);
-    System.out.println("Elapsed time: " + elapsed);
+    //System.out.println("Elapsed time: " + elapsed);
     
   }//end main
 
