@@ -216,13 +216,16 @@ public class Boogle
 	}//*/
 	
 	public static ArrayList<Integer> merge(ArrayList<Integer> a, ArrayList<Integer> b){
+		//initialize variables: new ArrayList object, sizes of ArrayList inputs, indices initialized to 0
 		ArrayList<Integer> merged = new ArrayList<Integer>();
-		int aSize = a.size();
+		int aSize = a.size(); 
 		int bSize = b.size();
 		int aLo = 0;
 		int bLo = 0;
 		
+		//create loop that runs unless aLo index or bLo index has reached the end of the Arraylist
 		while (aLo < aSize && bLo < bSize){
+			//set up conditional that compares the smallest values of each ArrayList and adds the smaller one to merged ArrayList
 			if (a.get(aLo) <= b.get(bLo)){
 				merged.add(a.get(aLo));
 				aLo++;
@@ -233,6 +236,7 @@ public class Boogle
 			}	
 		}
 		
+		//clean up for adding the remaining elements of the other array
 		if (aLo == aSize){
 			while (bLo < bSize){
 				merged.add(b.get(bLo));
