@@ -133,6 +133,7 @@ public class Boogle
 
     }
 	
+	/*/	
 	public static void selectionSort(ArrayList<Integer> al){
 		
 		//store size of array
@@ -153,8 +154,31 @@ public class Boogle
 			//replace original index value with stored temp variable
 			al.set(smallestIndex, tempLoValue);
 		}
-	}
+	}//*/
 	
+	// This version uses swap helper method
+	public static void selectionSort(ArrayList<Integer> al){	
+		//store size of array
+		int hi = al.size() - 1;
+		int tempLoValue;
+		int smallestIndex;
+		int smallestValue;
+		
+		//create loop where lo increments, and lo represents the lo parameter for findSmallest only needs to go to hi - 1, since the last doesn't need to be sorted
+		for (int lo = 0; lo < hi; lo++){
+			//run findSmallest on entire array and store the Index and the value
+			smallestIndex = findSmallest(al, lo, hi);
+			swap(al, lo, smallestIndex);
+		}
+	}//*/
+	
+	public static void swap(ArrayList<Integer> al, int index1, int index2){
+		int value1 = al.get(index1);
+		int value2 = al.get(index2);
+		
+		al.set(index1, value2);
+		al.set(index2, value1);
+	}
 	
 
 
