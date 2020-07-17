@@ -39,7 +39,7 @@ public class SSorter
     return maxIndexSoFar;
   }
 
-  public static void selectionSort(ArrayList<Integer> al) {
+  public static ArrayList<Integer> selectionSort(ArrayList<Integer> al) {
 
     int lo = 0;
     int temp;
@@ -50,6 +50,8 @@ public class SSorter
       al.set(i, al.get(lo));
       al.set(lo, temp);
     }
+	
+	return al;
 
   }//selectionSort
   
@@ -75,7 +77,7 @@ public class SSorter
 		}
 		
 		//clean up for adding the remaining elements of the other array
-		if (aLo == aSize){
+		if (aLo == aSize){//conditional actually not necessary, since the while loop will take care of it
 			while (bLo < bSize){
 				merged.add(b.get(bLo));
 				bLo++;
@@ -107,15 +109,19 @@ public class SSorter
   public static ArrayList<Integer> mergeSort(ArrayList<Integer> al){
 	int size = al.size();
 	
-	//base case
-	if (size == 1){
+	/* if (size == 1){
 		return al;
+	} */
+	
+	//base case if you really wanted to sort the last 2/3 without going down to one element
+	if (size == 2 || size == 3){
+		return selectionSort(al);
 	}
 	
 	int midIndex = size / 2;
 	
-	ArrayList<Integer> branch1 = mergeSort(slice(al, 0, midIndex));
-	ArrayList<Integer> branch2 = mergeSort(slice(al, midIndex, size));
+	ArrayList<Integer> branch1 = mergeSort(slice(al, 0, midIndex)); //slice method is inclusive of lower bound (0) and exclusive of upper bound (midIndex)
+	ArrayList<Integer> branch2 = mergeSort(slice(al, midIndex, size)); //inclusive of midIndex and exclusive of size
 	
 	return merge(branch1, branch2);
 	
@@ -144,6 +150,22 @@ public class SSorter
     // System.out.println(randos);
     //System.out.println("Elapsed time: " + elapsed);
     
-  }//end main
+  }//*/
+  
+ /*/ public static void main( String[] args ) {
+    
+	//merging topher test
+	for( int n=2; n<=10; n += 2 ) {
+			ArrayList tpe = prestoArrayListo(n,1,5);
+			ArrayList ohr = prestoArrayListo(n,1,5);
+			ArrayList topher = merge(tpe, ohr);
+			System.out.println("\ntpe" + n + " = " + tpe);
+			System.out.println("ohr" + n + " = " + ohr);
+			System.out.println("topher" + (2*n) + " = " + topher);
+			System.out.println("top" + n + " = " + slice(topher, 0, topher.size()/2));
+			System.out.println("her" + n + " = " + slice(topher, topher.size()/2, topher.size()));
+	}
+	
+}//*/
 
 }//end class
