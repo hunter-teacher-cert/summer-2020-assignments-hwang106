@@ -87,25 +87,33 @@ public class BSTree{
 		
 		TreeNode newNode = new TreeNode(value);
 		
-		while ((frontNode.getLeft() != null || frontNode.getRight() != null){
+		while (frontNode.getLeft() != null || frontNode.getRight() != null){
 			int frontValue = frontNode.getData();
-			if (frontValue == searchValue){
+			if (frontValue == value){
 				return;
 			}
-			else if (searchValue > frontValue){
+			else if (value > frontValue){
+				if (frontNode.getRight == null){
+					frontNode.SetRight(newNode);
+					return;
+				}
 				frontNode = frontNode.getRight();
 			}
 			else{
+				if (frontNode.getLeft() == null){
+					frontNode.setLeft(newNode);
+					return;
+				}
 				frontNode = frontNode.getLeft();
 			}
 		}
 		
-		if (searchValue > frontValue){
+		if (value > frontValue){
 			frontNode.setRight(newNode);
 			return;
 		}
 		
-		if (searchValue < frontValue){
+		if (value < frontValue){
 			frontNode.setLeft(newNode);
 			return;
 		}
@@ -117,8 +125,27 @@ public class BSTree{
 	
 	//traverse/print
 	
-	public String toString(BSTree t){
-		t
+	public String toString(){
+		return this.toString(this.root);
+	}
+	
+	public String toString(TreeNode node){
+		String s = "";
+		
+		if (node == null){
+			s = "null";
+		}
+		
+		else{
+			s += node.getData();
+			if (root.getLeft() != null || root.getRight() != null){
+				s = "(" + s + ", " + this.toString(this.root.getLeft());
+				s = s + ", " + this.toString(this.root.getRight()) + ")";
+			}
+				
+		}
+		
+		return s;
 		
 	}
 	
@@ -127,6 +154,7 @@ public class BSTree{
 	public static void main(String[] args){
 		BSTree seeded = new BSTree();
 		seeded.seed();
+		System.out.println(seeded);
 		try {System.out.println(seeded.search(150));}
 		catch (NullPointerException e){System.out.println("no such element");}
 		System.out.println(seeded.search(15));
