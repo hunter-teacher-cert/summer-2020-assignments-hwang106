@@ -76,12 +76,47 @@ public class BSTree{
 		throw new NullPointerException();
 	}
 	
-	//insert
+	//insert always inserts as a new leaf while following rules of a binary tree (i.e. right child always larger than parent; left child always smaller than parent)
+	public void insert(int value){
+		TreeNode currentNode = this.root;
+		
+		while (currentNode != null){
+			int currentValue = currentNode.getData();
+			if (currentValue == searchValue){
+				return;
+			}
+			else if (searchValue > currentValue){
+				currentNode = currentNode.getRight();
+			}
+			else{
+				currentNode = currentNode.getLeft();
+			}
+		}
+		
+		currentNode.setData(value);
+		
+	}
 	
 	//delete
 	
 	//traverse/print
-	//
+	
+	public String toString(TreeNode t){
+		if (t == null){
+			return "";
+		}
+		
+		String level = "";
+		
+		int left = t.getLeft();
+		int right = t.getRight();
+		
+		level += left + right + "\n";
+		
+	}
+	
+	
+	
 	public static void main(String[] args){
 		BSTree seeded = new BSTree();
 		seeded.seed();
