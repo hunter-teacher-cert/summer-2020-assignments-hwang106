@@ -78,22 +78,38 @@ public class BSTree{
 	
 	//insert always inserts as a new leaf while following rules of a binary tree (i.e. right child always larger than parent; left child always smaller than parent)
 	public void insert(int value){
-		TreeNode currentNode = this.root;
+		TreeNode frontNode = this.root;
 		
-		while (currentNode != null){
-			int currentValue = currentNode.getData();
-			if (currentValue == searchValue){
+		if (frontNode == null){
+			frontNode.setData(value);
+			return;
+		}
+		
+		TreeNode newNode = new TreeNode(value);
+		
+		while ((frontNode.getLeft() != null || frontNode.getRight() != null){
+			int frontValue = frontNode.getData();
+			if (frontValue == searchValue){
 				return;
 			}
-			else if (searchValue > currentValue){
-				currentNode = currentNode.getRight();
+			else if (searchValue > frontValue){
+				frontNode = frontNode.getRight();
 			}
 			else{
-				currentNode = currentNode.getLeft();
+				frontNode = frontNode.getLeft();
 			}
 		}
 		
-		currentNode.setData(value);
+		if (searchValue > frontValue){
+			frontNode.setRight(newNode);
+			return;
+		}
+		
+		if (searchValue < frontValue){
+			frontNode.setLeft(newNode);
+			return;
+		}
+		
 		
 	}
 	
@@ -101,17 +117,8 @@ public class BSTree{
 	
 	//traverse/print
 	
-	public String toString(TreeNode t){
-		if (t == null){
-			return "";
-		}
-		
-		String level = "";
-		
-		int left = t.getLeft();
-		int right = t.getRight();
-		
-		level += left + right + "\n";
+	public String toString(BSTree t){
+		t
 		
 	}
 	
