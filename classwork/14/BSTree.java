@@ -38,7 +38,8 @@ public class BSTree{
 				currentNode = currentNode.getLeft();
 			}
 			else{
-				return -1;
+				throw new NullPointerException();
+				//return -1; 
 			}
 		}
 		
@@ -47,8 +48,8 @@ public class BSTree{
 		}
 		
 		else{
-			//throw new NoSuchElementException();
-			return -1;
+			throw new NullPointerException();
+			//return -1;
 		}
 		
 	}
@@ -58,7 +59,7 @@ public class BSTree{
 	//delete
 	
 	//traverse/print
-	
+	/*/
 	public static void main(String[] args){
 		BSTree seeded = new BSTree();
 		seeded.seed();
@@ -69,7 +70,7 @@ public class BSTree{
 		System.out.println(seeded.search(5));
 		System.out.println(seeded.search(8));
 		System.out.println(seeded.search(1));
-	}
+	}//*/
 	
 	
 }
