@@ -79,6 +79,7 @@ public class BSTree{
 	//insert always inserts as a new leaf while following rules of a binary tree (i.e. right child always larger than parent; left child always smaller than parent)
 	public void insert(int value){
 		TreeNode frontNode = this.root;
+		int frontValue = 0; //not sure why, but javac says I need to initialize frontValue here, perhaps just in case, we never enter the while loop?
 		
 		if (frontNode == null){
 			frontNode.setData(value);
@@ -88,13 +89,14 @@ public class BSTree{
 		TreeNode newNode = new TreeNode(value);
 		
 		while (frontNode.getLeft() != null || frontNode.getRight() != null){
-			int frontValue = frontNode.getData();
+			frontValue = frontNode.getData();
+			
 			if (frontValue == value){
 				return;
 			}
 			else if (value > frontValue){
-				if (frontNode.getRight == null){
-					frontNode.SetRight(newNode);
+				if (frontNode.getRight() == null){
+					frontNode.setRight(newNode);
 					return;
 				}
 				frontNode = frontNode.getRight();
@@ -125,7 +127,7 @@ public class BSTree{
 	
 	//traverse/print
 	
-	public String toString(){
+/*  	public String toString(){
 		return this.toString(this.root);
 	}
 	
@@ -147,14 +149,42 @@ public class BSTree{
 		
 		return s;
 		
+	}  */
+	
+	public String searchPosition(int searchValue){
+		int level = 0;
+		String position = "root";
+		
+		TreeNode currentNode = this.root;
+		
+		while (currentNode != null){
+			int currentValue = currentNode.getData();
+			if (currentValue == searchValue){
+				return position + " " + level;
+			}
+			else if (searchValue > currentValue){
+				currentNode = currentNode.getRight();
+				level++;
+				position += " right";
+			}
+			else{
+				currentNode = currentNode.getLeft();
+				level++;
+				position += " left";
+			}
+		}
+		
+		return "node not found";
+		
+		
 	}
+	
 	
 	
 	
 	public static void main(String[] args){
 		BSTree seeded = new BSTree();
 		seeded.seed();
-		System.out.println(seeded);
 		try {System.out.println(seeded.search(150));}
 		catch (NullPointerException e){System.out.println("no such element");}
 		System.out.println(seeded.search(15));
@@ -165,6 +195,27 @@ public class BSTree{
 		System.out.println(seeded.search(8));
 		try {System.out.println(seeded.search(1));}
 		catch (NullPointerException e){System.out.println("no such element");}
+		System.out.println(seeded.searchPosition(10));
+		System.out.println(seeded.searchPosition(5));
+		System.out.println(seeded.searchPosition(20));
+		//System.out.println(seeded.searchPosition(3));
+		System.out.println(seeded.searchPosition(8));
+		System.out.println(seeded.searchPosition(15));
+		System.out.println(seeded.searchPosition(22));
+		seeded.insert(3);
+		seeded.insert(4);
+		seeded.insert(23);
+		seeded.insert(12);
+		seeded.insert(18);
+		//seeded.insert(3);
+		
+		System.out.println(seeded.searchPosition(3));
+		System.out.println(seeded.searchPosition(4));
+		System.out.println(seeded.searchPosition(23));
+		System.out.println(seeded.searchPosition(12));
+		System.out.println(seeded.searchPosition(18));
+		
+		
 	}//*/
 	
 	
