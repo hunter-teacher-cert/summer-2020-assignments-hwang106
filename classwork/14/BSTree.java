@@ -220,7 +220,7 @@ public class BSTree{
 	
 	//traverse/print
 	public void printData(){
-		System.out.print("{" + this.root.getData() + " |");
+		System.out.print("{root: " + this.root.getData() + " |");
 		printData(this.root);
 		System.out.print("}");
 	}
@@ -229,31 +229,13 @@ public class BSTree{
 		if (node == null){
 			return;
 		}
-		
-		printLeft(node.getLeft());
-		printRight(node.getRight());
+	
 		printData(node.getLeft());
+		System.out.print(", " + node.getData());
 		printData(node.getRight());
 		
 	}
 	
-	public void printLeft(TreeNode node){
-		if (node == null){
-			return;
-		}
-		
-		System.out.print(" " + node.getData());
-		//printLeft(node.getLeft());
-	}
-	
-	public void printRight(TreeNode node){
-		if (node == null){
-			return;
-		}
-		
-		System.out.print(" " + node.getData());
-		//printRight(node.getRight());
-	}
 	
 	
 	
