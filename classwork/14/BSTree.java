@@ -78,15 +78,18 @@ public class BSTree{
 	
 	//insert always inserts as a new leaf while following rules of a binary tree (i.e. right child always larger than parent; left child always smaller than parent)
 	public void insert(int value){
-		TreeNode frontNode = this.root;
-		int frontValue = 0; //not sure why, but javac says I need to initialize frontValue here, perhaps just in case, we never enter the while loop?
+
 		
-		if (frontNode == null){
-			frontNode.setData(value);
+		TreeNode newNode = new TreeNode(value);
+		
+		if (this.root == null){
+			this.root = newNode;
 			return;
 		}
 		
-		TreeNode newNode = new TreeNode(value);
+		TreeNode frontNode = this.root;
+		int frontValue;
+		
 		
 		while (frontNode.getLeft() != null || frontNode.getRight() != null){
 			frontValue = frontNode.getData();
@@ -110,6 +113,8 @@ public class BSTree{
 			}
 		}
 		
+		frontValue = frontNode.getData();
+		
 		if (value > frontValue){
 			frontNode.setRight(newNode);
 			return;
@@ -124,6 +129,87 @@ public class BSTree{
 	}
 	
 	//delete
+	public void delete(int key){
+		
+		/*
+		algorithm 1
+		-search for TreeNode matching key
+		-"re-branch" tree such that the child with the fewest branches replaces the deleted TreeNode
+		-connect lagging TreeNode to child with fewest branches
+		-if right branch, traverse left from that branch until null
+		-connect lagging TreeNode to the former left branch of the deleted TreeNode
+		-vice versa; or for simplicity, just always choose one side
+		*/
+		
+		if (this.root == null){
+			return;
+			//potentially throw exception instead
+		}
+		
+		TreeNode current = this.root;
+		TreeNode lagging = current;
+		boolean isLeftChild = true;
+		
+		while (current != null){
+			int currentValue = current.getData();
+			
+			if (currentValue == key){
+				//special case if the node to be deleted is a terminal node
+				if (current.getLeft() == null && current.getRight() == null){
+					if (isLeftChild){
+						lagging.setLeft(null);
+						return;
+					} else{
+						lagging.setRight(null);
+						return;
+					}
+				}
+				//more common case, where lagging node is rewired to connect to the left child of the current node by default, and rightmost branch of this connection before null is rewired to the "root" of the right branch of the former current node (programatically the latter rewiring happens first, so access isn't lost)
+				TreeNode current2 = current.getLeft();
+				TreeNode lagging2 = current2;
+				while (current2 != null){
+					lagging2 = current2;
+					current2 = current2.getRight();
+				}
+				
+				lagging2.setRight(current.getRight());
+				
+				if (isLeftChild){
+					lagging.setLeft(current.getLeft());
+					return;
+				} else{
+					lagging.setRight(current.getLeft());
+					return;
+				}
+			}
+			
+			if (key > currentValue){
+				lagging = current;
+				current = current.getRight();
+				isLeftChild = false;
+			} else{
+				lagging = current;
+				current = current.getLeft();
+				isLeftChild = true;
+			}
+		}
+		
+		return;
+		//consider throwing NoSuchElementException instead
+		
+
+		
+		/*
+		algorithm 2
+		-search for TreeNode matching key
+		-create new TreeNode that points to TreeNode matching key
+		-remove connection from lagging TreeNode (parent) to TreeNode with matching key
+		-recursively traverse the new TreeNode, getting the values of each branch, and adding it to original BSTree, invoking the already-made insert method (possibly store values in an array, though seems overly complicated)
+		*/
+		
+		
+		
+	}
 	
 	//traverse/print
 	
@@ -184,8 +270,8 @@ public class BSTree{
 	
 	public static void main(String[] args){
 		BSTree seeded = new BSTree();
-		seeded.seed();
-		try {System.out.println(seeded.search(150));}
+		//seeded.seed();
+		/* try {System.out.println(seeded.search(150));}
 		catch (NullPointerException e){System.out.println("no such element");}
 		System.out.println(seeded.search(15));
 		System.out.println(seeded.search(20));
@@ -201,12 +287,16 @@ public class BSTree{
 		//System.out.println(seeded.searchPosition(3));
 		System.out.println(seeded.searchPosition(8));
 		System.out.println(seeded.searchPosition(15));
-		System.out.println(seeded.searchPosition(22));
+		System.out.println(seeded.searchPosition(22)); */
 		seeded.insert(3);
 		seeded.insert(4);
 		seeded.insert(23);
 		seeded.insert(12);
 		seeded.insert(18);
+		seeded.insert(13);
+		seeded.insert(2);
+		seeded.insert(1);
+		seeded.insert(20);
 		//seeded.insert(3);
 		
 		System.out.println(seeded.searchPosition(3));
@@ -214,6 +304,21 @@ public class BSTree{
 		System.out.println(seeded.searchPosition(23));
 		System.out.println(seeded.searchPosition(12));
 		System.out.println(seeded.searchPosition(18));
+		System.out.println(seeded.searchPosition(13));
+		System.out.println(seeded.searchPosition(2));
+		System.out.println(seeded.searchPosition(1));
+		System.out.println(seeded.searchPosition(20));
+		
+		seeded.delete(23);
+		System.out.println(seeded.searchPosition(3));
+		System.out.println(seeded.searchPosition(4));
+		System.out.println(seeded.searchPosition(23));
+		System.out.println(seeded.searchPosition(12));
+		System.out.println(seeded.searchPosition(18));
+		System.out.println(seeded.searchPosition(13));
+		System.out.println(seeded.searchPosition(2));
+		System.out.println(seeded.searchPosition(1));
+		System.out.println(seeded.searchPosition(20));
 		
 		
 	}//*/
