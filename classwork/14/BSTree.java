@@ -138,7 +138,7 @@ public class BSTree{
 		-connect lagging TreeNode to child with fewest branches
 		-if right branch, traverse left from that branch until null
 		-connect lagging TreeNode to the former left branch of the deleted TreeNode
-		-vice versa; or for simplicity, just always choose one side
+		-vice versa; or for simplicity, just always choose one side (ended up doing this and choosing left side everytime)
 		*/
 		
 		if (this.root == null){
@@ -147,8 +147,8 @@ public class BSTree{
 		}
 		
 		TreeNode current = this.root;
-		TreeNode lagging = current;
-		boolean isLeftChild = true;
+		TreeNode lagging = current; 
+		boolean isLeftChild = true; //used to decide whether to setLeft or setRight when connecting parent of deleted item to child of deleted item. 
 		
 		while (current != null){
 			int currentValue = current.getData();
@@ -164,6 +164,18 @@ public class BSTree{
 						return;
 					}
 				}
+				//another special case if the node to be deleted is the root
+				if (current == this.root){
+					current = current.getLeft();
+					while (current != null){
+						lagging = current;
+						current = current.getRight();
+					}
+					lagging.setRight(this.root.getRight()); //connects upper bound of left branch to the right branch of original root
+					this.root = this.root.getLeft(); //reassigns the root to the left child (arbitrarily; it could also have been the right child)
+					return;
+				}
+				
 				//more common case, where lagging node is rewired to connect to the left child of the current node by default, and rightmost branch of this connection before null is rewired to the "root" of the right branch of the former current node (programatically the latter rewiring happens first, so access isn't lost)
 				TreeNode current2 = current.getLeft();
 				TreeNode lagging2 = current2;
@@ -194,10 +206,8 @@ public class BSTree{
 			}
 		}
 		
-		return;
+		return; //exits while loop if null, meaning key not found, meaning nothing to delete
 		//consider throwing NoSuchElementException instead
-		
-
 		
 		/*
 		algorithm 2
@@ -205,15 +215,19 @@ public class BSTree{
 		-create new TreeNode that points to TreeNode matching key
 		-remove connection from lagging TreeNode (parent) to TreeNode with matching key
 		-recursively traverse the new TreeNode, getting the values of each branch, and adding it to original BSTree, invoking the already-made insert method (possibly store values in an array, though seems overly complicated)
-		*/
-		
-		
-		
+		*/	
 	}
 	
 	//traverse/print
+	public String printData(){
+		return null; 
+	}
 	
-/*  	public String toString(){
+	
+	
+/*  
+	not functioning and deprioritized after writing searchPosition method for testing purposes
+	public String toString(){
 		return this.toString(this.root);
 	}
 	
@@ -270,7 +284,7 @@ public class BSTree{
 	
 	public static void main(String[] args){
 		BSTree seeded = new BSTree();
-		//seeded.seed();
+		seeded.seed();
 		/* try {System.out.println(seeded.search(150));}
 		catch (NullPointerException e){System.out.println("no such element");}
 		System.out.println(seeded.search(15));
@@ -284,7 +298,7 @@ public class BSTree{
 		System.out.println(seeded.searchPosition(10));
 		System.out.println(seeded.searchPosition(5));
 		System.out.println(seeded.searchPosition(20));
-		//System.out.println(seeded.searchPosition(3));
+		System.out.println(seeded.searchPosition(3));
 		System.out.println(seeded.searchPosition(8));
 		System.out.println(seeded.searchPosition(15));
 		System.out.println(seeded.searchPosition(22)); */
@@ -308,17 +322,32 @@ public class BSTree{
 		System.out.println(seeded.searchPosition(2));
 		System.out.println(seeded.searchPosition(1));
 		System.out.println(seeded.searchPosition(20));
-		
-		seeded.delete(23);
-		System.out.println(seeded.searchPosition(3));
-		System.out.println(seeded.searchPosition(4));
-		System.out.println(seeded.searchPosition(23));
-		System.out.println(seeded.searchPosition(12));
-		System.out.println(seeded.searchPosition(18));
-		System.out.println(seeded.searchPosition(13));
-		System.out.println(seeded.searchPosition(2));
-		System.out.println(seeded.searchPosition(1));
+		System.out.println(seeded.searchPosition(10));
+		System.out.println(seeded.searchPosition(5));
 		System.out.println(seeded.searchPosition(20));
+		System.out.println(seeded.searchPosition(3));
+		System.out.println(seeded.searchPosition(8));
+		System.out.println(seeded.searchPosition(15));
+		System.out.println(seeded.searchPosition(22));
+		
+		seeded.delete(10);
+		System.out.println("");
+		
+		System.out.println("3 is in position " + seeded.searchPosition(3));
+		System.out.println("4 is in position " + seeded.searchPosition(4));
+		System.out.println("23 is in position " + seeded.searchPosition(23));
+		System.out.println("12 is in position " + seeded.searchPosition(12));
+		System.out.println("18 is in position " + seeded.searchPosition(18));
+		System.out.println("13 is in position " + seeded.searchPosition(13));
+		System.out.println("2 is in position " + seeded.searchPosition(2));
+		System.out.println("1 is in position " + seeded.searchPosition(1));
+		System.out.println("20 is in position " + seeded.searchPosition(20));
+		System.out.println("10 is in position " + seeded.searchPosition(10));
+		System.out.println("5 is in position " + seeded.searchPosition(5));
+		System.out.println("20 is in position " + seeded.searchPosition(20));
+		System.out.println("8 is in position " + seeded.searchPosition(8));
+		System.out.println("15 is in position " + seeded.searchPosition(15));
+		System.out.println("22 is in position " + seeded.searchPosition(22));
 		
 		
 	}//*/
