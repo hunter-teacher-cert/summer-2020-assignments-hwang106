@@ -219,8 +219,40 @@ public class BSTree{
 	}
 	
 	//traverse/print
-	public String printData(){
-		return null; 
+	public void printData(){
+		System.out.print("{" + this.root.getData() + " |");
+		printData(this.root);
+		System.out.print("}");
+	}
+	
+	public void printData(TreeNode node){
+		if (node == null){
+			return;
+		}
+		
+		printLeft(node.getLeft());
+		printRight(node.getRight());
+		printData(node.getLeft());
+		printData(node.getRight());
+		
+	}
+	
+	public void printLeft(TreeNode node){
+		if (node == null){
+			return;
+		}
+		
+		System.out.print(" " + node.getData());
+		//printLeft(node.getLeft());
+	}
+	
+	public void printRight(TreeNode node){
+		if (node == null){
+			return;
+		}
+		
+		System.out.print(" " + node.getData());
+		//printRight(node.getRight());
 	}
 	
 	
@@ -330,7 +362,7 @@ public class BSTree{
 		System.out.println(seeded.searchPosition(15));
 		System.out.println(seeded.searchPosition(22));
 		
-		seeded.delete(10);
+		//seeded.delete(10);
 		System.out.println("");
 		
 		System.out.println("3 is in position " + seeded.searchPosition(3));
@@ -348,6 +380,8 @@ public class BSTree{
 		System.out.println("8 is in position " + seeded.searchPosition(8));
 		System.out.println("15 is in position " + seeded.searchPosition(15));
 		System.out.println("22 is in position " + seeded.searchPosition(22));
+		
+		seeded.printData();
 		
 		
 	}//*/
