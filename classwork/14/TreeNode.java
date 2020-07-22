@@ -44,4 +44,9 @@ public class TreeNode{
 		this.rightChild = right;
 	}
 	
+	public String toString(){
+		String s = "";
+		return s += this.data;
+	}
+	
 }
