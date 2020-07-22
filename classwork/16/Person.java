@@ -59,4 +59,10 @@ public class Person{
 	public void setNumber(String phone){
 		this.phoneNumber = phone;
 	}
+	
+	//toString overwrite
+	public String toString(){
+		return this.lastName + ", " + this.firstName + ", " this.phoneNumber;
+	}
+	
 }
