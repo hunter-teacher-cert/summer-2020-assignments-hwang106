@@ -44,7 +44,18 @@ public class PhoneBook{
 		//run until end of array has been reached
 	}
 	
-	
+	//hash function
+	public static int hash(String ln){
+		int hash = 0;
+		
+		//hash = ln.charAt(0); //if we are using an array that is just based on the first letter of the last name
+		
+		for (i = 0; i < ln.length(); i++){
+			int charValue = ln.chartAt(i);
+			hash += charValue;//simplistic hash function that is bound to result in collisions
+		}
+		//return hash % array.length(); 
+	}
 	
 }
 
