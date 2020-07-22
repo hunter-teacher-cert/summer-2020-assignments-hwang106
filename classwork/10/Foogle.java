@@ -37,12 +37,14 @@ public class Foogle
 	  int midValue;
 	  int ceiling = length - 1;
 	  int floor = 0;
+	  int compCount = 0;
 	  
 	  while (ceiling >= floor){
 		  midIndex = (ceiling + floor) / 2;
 		  midValue = (int) al.get(midIndex);
 		  
 		  if (target == midValue ){
+			  System.out.println("The number of comparisons is: " + compCount);
 			  return midIndex;
 		  }
 		  
@@ -53,11 +55,14 @@ public class Foogle
 		  else {
 			  ceiling = midIndex - 1;
 		  }
+		  
+		  compCount++;
 	  }
+	  System.out.println("The number of comparisons is: " + compCount);
 	  return -1;
   }
   
-  public static int binSearch(ArrayList al, int target){
+   public static int binSearch(ArrayList al, int target){
 	  int floor = 0;
 	  int ceiling = al.size() - 1;
 	  
@@ -85,7 +90,7 @@ public class Foogle
 	  }
 	  
 	  return binSearch(al, target, floor, ceiling);
-  }
+  } 
   
   //legacy version of indexOfSorted
   /* public static int indexOfSorted(ArrayList al, int target){
@@ -120,10 +125,10 @@ public class Foogle
 		return length - 1;
 	}
 	return -1; //if not found  
-  } */
+  } 
   
   
-  /* legacy version of recursive binSearch //recursive version overloading binSearch 
+/*   //legacy version of recursive binSearch //recursive version overloading binSearch 
   public static int binSearch(ArrayList al, int target){
 	  int length = al.size();
 	  int midIndex = length/2;
@@ -169,8 +174,8 @@ public class Foogle
 		
 		return binSearch(al, target, floor, ceiling, midIndex);
 
-  }
- */
+  } */
+ 
 
   //  populates an ArrayList with custom number of items with integer numbers between lo and hi
   public static ArrayList randPopArray(int numItems, int lo, int hi)
@@ -218,9 +223,11 @@ public class Foogle
 
   public static void main( String[] args )
   {
-    ArrayList sal04 = preAddRand(20,1,3); //creates non-repeating sorted array with size 20, with maximum increases of 3
+     ArrayList sal04 = preAddRand(20,1,3); //creates non-repeating sorted array with size 20, with maximum increases of 3
 	sal04.set(19, 50); //non-random value for last item to check upper-bound in tests
-    System.out.println(sal04);
+    System.out.println("The first array just represent the indices of the bottom sorted array for faster checking");
+	System.out.println("[0, 1, 2, 3, 4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]");
+	System.out.println(sal04);
 	System.out.println("This is the index of 0 using linear search: " + indexOf(sal04,0));
     System.out.println("This is the index of 13 using linear search: " + indexOf(sal04,13));
 	System.out.println("This is the index of 30 using linear search: " + indexOf(sal04,30));
@@ -232,7 +239,53 @@ public class Foogle
 	System.out.println("This is the index of 0 using recursive binary search: " + binSearch(sal04,0));
     System.out.println("This is the index of 13 using recursive binary search: " + binSearch(sal04,13));
 	System.out.println("This is the index of 30 using recursive binary search: " + binSearch(sal04,30));
-	System.out.println("This is the index of 50 using recursive binary search: " + binSearch(sal04,50));
+	System.out.println("This is the index of 50 using recursive binary search: " + binSearch(sal04,50)); 
+	 /*
+       ~~~ The RSPB Special Trace-athon ~~~
+       YOUR MISSION:
+       Form a Dynamic Duo of Destiny or a Trio of Triump. Conjure team name portending greatness (TNPG).
+       Copypasta this into main method of your java sourcecode file containing methods linSearch and binSearch
+         (Boogle.java for almost all of you)
+       Verify it works. 
+          (If any test calls do not yield expected outputs, there is some tuning to be done... 
+           Probably best to just grab a working version for now.)
+       On KtS, with at least 1 tracing buddy, trace out each binSearch() call.
+       NOTA BENE: The second batch of test calls are identical to the first, 
+                  except that the search space has grown by 1 element...
+     
+    
+     ArrayList salamander = new ArrayList();
+
+    //explicitly fill arraylist with intent to search for
+    // present and nonpresent values...
+    // generate an arraylist with an odd num of elems...
+    salamander.add(4);
+    salamander.add(8);
+    salamander.add(15);
+    salamander.add(16);
+    salamander.add(23);
+    System.out.println(salamander);
+
+    //search for target in the list
+    System.out.println(binSearch(salamander, 8));  // 1
+    System.out.println(binSearch(salamander, 15)); // 2
+    System.out.println(binSearch(salamander, 16)); // 3
+
+    //search for target not in the list
+    System.out.println(binSearch(salamander, 3)); // -1
+    System.out.println(binSearch(salamander, 9)); // -1
+
+    //add another element, for an even num of elems
+    salamander.add(42);
+    System.out.println(salamander);
+    //search for target in the list
+    System.out.println(binSearch(salamander, 8));  // 1
+    System.out.println(binSearch(salamander, 15)); // 2
+    System.out.println(binSearch(salamander, 16)); // 3
+
+    //search for target not in the list
+    System.out.println(binSearch(salamander, 3)); // -1
+    System.out.println(binSearch(salamander, 9)); // -1 */
 
   }//end main
 
