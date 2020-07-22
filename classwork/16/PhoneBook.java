@@ -64,10 +64,24 @@ public class PhoneBook{
 
 Additional Questions:
 
-1) What is the runtime for add? 
+1) What is the runtime for add?
+Accessing the array index is direct, so O(1), adding to the linked list requires no traversal, so also O(1). Overall: constant time. 
+
 2) What is the runtime for find?
+Hash function runtime is negligible (but technically could depend on length of lastName string, depending which hash function is utilized).
+Array access is O(1).
+Searching linked list is O(n)
+Overall: O(n)
+
 3) What is the runtime for remove?
+Array access is O(1).
+Traversing linked list is O(n).
+Removing is O(1).
+Overall: O(n)
+
 4) What is the runtime for printList?
+O(n), with n being all the elements in every linked list.
+Alternatively a * b, with a being the array size and b being the average linked list length
 
 Brainstorming Area:
 -Premise of phone book, is that dataset can get quite large, so order of how algorithm scales will be important
