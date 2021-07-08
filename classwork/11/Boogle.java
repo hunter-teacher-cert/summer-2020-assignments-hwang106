@@ -1,5 +1,5 @@
 /**
-   classwork -- Day 10 | 0b1010 | 0x10
+   classwork -- Day 10 | 0b1010 | 0x0a
    class: Boogle
    A tester class for code analysis and search exploration.
    USAGE:
